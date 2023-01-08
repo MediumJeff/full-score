@@ -12,15 +12,15 @@ const getStudent = asyncHandler(async (req, res) => {
 // @route POST /api/students
 // @access Private after authentication
 const createStudent = asyncHandler(async (req, res) => {
-    if (!req.body.name) {
-        res.status(400)
-        throw new Error('Incomplete student file')
-    }
     const student = await Student.create({
         name: req.body.name,
         studentId: req.body.id,
         instrument: req.body.instrument
     })
+    if (!req.body.name) {
+        res.status(400)
+        throw new Error('Incomplete student file')
+    }
     res.status(200).json(student)
 })
 // @desc Update student file

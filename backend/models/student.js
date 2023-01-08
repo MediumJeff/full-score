@@ -11,10 +11,13 @@ const studentSchema = mongoose.Schema({
         unique: [true, 'This student number is already in use.']
     },
     instrument: {
-        type: []
+        type: String,
+        default: [],
+        required: [true, 'Please enter your primary instrument or vocal range.']
     }
 }, {
     timestamps: true
 })
+
 
 module.exports = mongoose.model('Student', studentSchema);
