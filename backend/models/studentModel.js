@@ -80,7 +80,7 @@ const studentSchema = mongoose.Schema({
         trim: true,
         validate: {
             validator: function (v) {
-                return /^[0-9]{10}/.test(v);
+                return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(v);
             },
             message: '{VALUE} is not a valid phone number!'
         }
