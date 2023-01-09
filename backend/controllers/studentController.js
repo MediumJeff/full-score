@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const Student = require('../models/student');
+const Student = require('../models/studentModel');
 
 // @desc Retrieve student file
 // @route GET /api/students
@@ -27,14 +27,14 @@ const createStudent = asyncHandler(async (req, res) => {
 // @route PUT /api/students/:id
 // @access Private after authentication
 const updateStudent = asyncHandler(async (req, res) => {
-    const student = await Student.findById(req.params.studentId)
+    const student = await Student.findById(req.params.id)
 
     if (!student) {
         res.status(400)
         throw new Error('Student not found')
     }
 
-    const updatedStudent = await Student.findByIdAndUpdate(req.params.studentId, req.body, {
+    const updatedStudent = await Student.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
     })
 
@@ -44,7 +44,7 @@ const updateStudent = asyncHandler(async (req, res) => {
 // @route DELETE /api/students
 // @access Private after authentication
 const deleteStudent = asyncHandler(async (req, res) => {
-    const student = await Student.findById(req.params.studentId)
+    const student = await Student.findById(req.params.id)
 
     if (!student) {
         res.status(400)
@@ -52,7 +52,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
     }
 
     await student.remove()
-    res.json(`Removed student ${req.params.studentId}`)
+    res.json(`Removed student ${req.params.id}`)
 })
 
 module.exports = {
