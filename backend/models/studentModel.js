@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const parentSchema = mongooseSchema({
+const parentSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'Please enter your first name.']
@@ -27,7 +27,7 @@ const parentSchema = mongooseSchema({
         trim: true,
         validate: {
             validator: function (v) {
-                return /^[0-9]{10}/.test(v);
+                return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(v);
             },
             message: '{VALUE} is not a valid phone number!'
         }
@@ -44,7 +44,7 @@ const studentSchema = mongoose.Schema({
         required: [true, 'Please enter your last name.']
     },
     studentId: {
-        type: Number,
+        type: String,
         required: [true, 'Please enter your Student ID number.'],
         unique: [true, 'This student number is already in use.']
     },

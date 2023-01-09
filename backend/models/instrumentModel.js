@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const student = require('./studentModel');
 
 const assignmentSchema = mongoose.Schema({
     studentAssigned: {
-        type: [student],
+        type: String,
     },
     dateOut: {
         type: Date,
@@ -27,17 +26,17 @@ const instrumentSchema = mongoose.Schema({
     },
     serialNumber: {
         type: String,
-        required: [true, 'Please enter a serial number.']
+        required: [true, 'Please enter a serial number.'],
     },
     schoolNumber: {
-        type: String
+        type: String,
+        unique: [true, 'That number is already in use.']
     }, 
     assignedTo: {
-        type: [assignmentSchema]
+        type: [assignmentSchema],
     },
     damageNotes: {
-        type: String,
-        default: []
+        type: []
     }
 }, {
     timestamps: true

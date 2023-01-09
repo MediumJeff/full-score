@@ -15,9 +15,15 @@ const getStudent = asyncHandler(async (req, res) => {
 // @access Private after authentication
 const createStudent = asyncHandler(async (req, res) => {
     const student = await Student.create({
-        name: req.body.name,
-        studentId: req.body.id,
-        instrument: req.body.instrument
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        studentId: req.body.studentId,
+        gradeLevel: req.body.gradeLevel,
+        instrument: req.body.instrument,
+        ensembles: req.body.ensembles,
+        email: req.body.email,
+        phone: req.body.phone,
+        parent: req.body.parent
     })
     if (!req.body) {
         res.status(400)
