@@ -8,6 +8,8 @@ const getStudent = asyncHandler(async (req, res) => {
     const students = await Student.find()
     res.status(200).json(students)
 })
+
+// BEWARE of nested data within student files
 // @desc Create student file
 // @route POST /api/students
 // @access Private after authentication
@@ -23,6 +25,7 @@ const createStudent = asyncHandler(async (req, res) => {
     }
     res.status(200).json(student)
 })
+
 // @desc Update student file
 // @route PUT /api/students/:id
 // @access Private after authentication
@@ -40,6 +43,8 @@ const updateStudent = asyncHandler(async (req, res) => {
 
     res.status(200).json(updatedStudent)
 })
+
+// --> Create archive option for graduated students, students who left program
 // @desc Delete student file
 // @route DELETE /api/students
 // @access Private after authentication

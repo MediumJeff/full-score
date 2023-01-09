@@ -9,6 +9,29 @@ const parentSchema = mongooseSchema({
         type: String,
         required: [true, 'Please enter your last name.']
     },
+    email: {
+        type: String,
+        unique: [true, "Email already in use."],
+        lowercase: true,
+        trim: true,
+        required: [true, "Please enter a valid email."],
+        validate: {
+            validator: function (v) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+            },
+            message: '{VALUE} is not a valid email!'
+        }
+    },
+    phone: {
+        type: String,
+        trim: true,
+        validate: {
+            validator: function (v) {
+                return /^[0-9]{10}/.test(v);
+            },
+            message: '{VALUE} is not a valid phone number!'
+        }
+    },
 })
 
 const studentSchema = mongoose.Schema({
@@ -62,6 +85,9 @@ const studentSchema = mongoose.Schema({
             message: '{VALUE} is not a valid phone number!'
         }
     },
+    parent: {
+        type: [parentSchema]
+    }
 }, {
     timestamps: true
 })
