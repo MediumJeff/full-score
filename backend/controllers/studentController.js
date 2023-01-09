@@ -17,7 +17,7 @@ const createStudent = asyncHandler(async (req, res) => {
         studentId: req.body.id,
         instrument: req.body.instrument
     })
-    if (!req.body.name) {
+    if (!req.body) {
         res.status(400)
         throw new Error('Incomplete student file')
     }
@@ -27,14 +27,14 @@ const createStudent = asyncHandler(async (req, res) => {
 // @route PUT /api/students/:id
 // @access Private after authentication
 const updateStudent = asyncHandler(async (req, res) => {
-    const student = await Student.findById(req.params.id)
+    const student = await Student.findById(req.params.studentId)
 
     if (!student) {
         res.status(400)
         throw new Error('Student not found')
     }
 
-    const updatedStudent = await Student.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedStudent = await Student.findByIdAndUpdate(req.params.studentId, req.body, {
         new: true,
     })
 
@@ -44,7 +44,7 @@ const updateStudent = asyncHandler(async (req, res) => {
 // @route DELETE /api/students
 // @access Private after authentication
 const deleteStudent = asyncHandler(async (req, res) => {
-    const student = await Student.findById(req.params.id)
+    const student = await Student.findById(req.params.studentId)
 
     if (!student) {
         res.status(400)
@@ -52,7 +52,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
     }
 
     await student.remove()
-    res.json(`Removed student ${req.params.id}`)
+    res.json(`Removed student ${req.params.studentId}`)
 })
 
 module.exports = {
