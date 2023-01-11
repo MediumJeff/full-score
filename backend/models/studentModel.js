@@ -1,5 +1,20 @@
 const mongoose = require('mongoose');
 
+const addressScehma = mongoose.Schema({
+    street: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    zipCode: {
+        type: String
+    }
+})
+
 const parentSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -21,6 +36,9 @@ const parentSchema = mongoose.Schema({
             },
             message: '{VALUE} is not a valid email!'
         }
+    },
+    address: {
+        type: [addressScehma]
     },
     phone: {
         type: String,
@@ -74,6 +92,9 @@ const studentSchema = mongoose.Schema({
             },
             message: '{VALUE} is not a valid email!'
         }
+    },
+    address: {
+        type: [addressScehma]
     },
     phone: {
         type: String,

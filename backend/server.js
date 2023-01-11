@@ -14,6 +14,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/api/students', require('./routes/studentRoutes'))
 app.use('/api/instruments', require('./routes/instrumentRoutes'))
+app.use('/api/calendar', require('./routes/calendarRoutes'))
 
 app.use(errorHandler)
 

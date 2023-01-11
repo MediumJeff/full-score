@@ -22,6 +22,7 @@ const createStudent = asyncHandler(async (req, res) => {
         instrument: req.body.instrument,
         ensembles: req.body.ensembles,
         email: req.body.email,
+        address: req.body.address,
         phone: req.body.phone,
         parent: req.body.parent
     })
