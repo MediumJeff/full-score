@@ -10,12 +10,18 @@ const calendarSchema = mongoose.Schema({
     eventDate: {
         type: Date,
         required: [true, 'Please enter the date of the event.'],
-        min: new Date()
+        min: [new Date(), 'Please enter a date in the future.']
+    },
+    eventLocation: {
+        type: String
     },
     eventStartTime: {
         type: String
     },
     eventEndTime: {
+        type: String
+    },
+    notes: {
         type: String
     }
 }, {
