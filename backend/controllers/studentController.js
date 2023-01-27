@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Student = require('../models/studentModel');
+// const authenticate = require('../../authenticate');
 
 // @desc Retrieve student file
 // @route GET /api/students
