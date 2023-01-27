@@ -6,8 +6,9 @@ const {
     updateStudent,
     deleteStudent
 } = require('../controllers/studentController');
+const { protect } = require('../middleware/authMiddleware');
 
-router.route('/').get(getStudent).post(createStudent)
-router.route('/:id').put(updateStudent).delete(deleteStudent)
+router.route('/').get(protect, getStudent).post(protect, createStudent)
+router.route('/:id').put(protect, updateStudent).delete(protect, deleteStudent)
 
 module.exports = router;

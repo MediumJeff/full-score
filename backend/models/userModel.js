@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-
 
 const userSchema = mongoose.Schema ({
     firstName: {
@@ -18,7 +16,8 @@ const userSchema = mongoose.Schema ({
     },
     accountType: {
         type: String,
-        required: [true, 'Please choose Student or Parent account.']
+        required: [true, 'Please choose Student or Parent account.'],
+        default: "Student"
     },
     admin: {
         type: Boolean,
@@ -33,6 +32,5 @@ const userSchema = mongoose.Schema ({
     timestamps: true
 })
 
-userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', userSchema);

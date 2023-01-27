@@ -1,13 +1,18 @@
 const asyncHandler = require('express-async-handler');
 const Student = require('../models/studentModel');
-// const authenticate = require('../../authenticate');
 
 // @desc Retrieve student file
 // @route GET /api/students
 // @access Private after authentication
 const getStudent = asyncHandler(async (req, res) => {
-    const students = await Student.find()
-    res.status(200).json(students)
+    let students
+    if(req.user.admin) {
+        students = await Student.find()
+        res.status(200).json(students)
+    } else {
+        students = await Student.findOne({email: req.user.email})
+        res.status(200).json(students)
+    }
 })
 
 // BEWARE of nested data within student files

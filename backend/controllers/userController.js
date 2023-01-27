@@ -10,7 +10,7 @@ const User = require('../models/userModel');
 // @access Public -- Admin accounts can only be created by other admin accounts
 // Account creation must be approved by admin to avoid unauthorized access, add approval Boolean in model?
 const newUser = asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, password } = req.body
+    const { firstName, lastName, email, accountType, admin, password } = req.body
     if(!firstName || !lastName || !email || !password) {
         res.status(400)
         throw new Error('Please fill in all fields.')
@@ -33,6 +33,8 @@ const newUser = asyncHandler(async (req, res) => {
         firstName,
         lastName,
         email,
+        accountType,
+        admin,
         password: hashedPassword
     })
 
