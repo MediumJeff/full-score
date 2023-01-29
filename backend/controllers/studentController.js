@@ -68,9 +68,13 @@ const deleteStudent = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Student not found')
     }
-
+    if(req.user.admin){
     await student.remove()
     res.json(`Removed student ${req.params.id}`)
+    } else {
+        res.status(401)
+        throw new Error ('User not authorized.')
+    }
 })
 
 module.exports = {

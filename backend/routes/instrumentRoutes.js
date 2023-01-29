@@ -6,8 +6,9 @@ const {
     updateInstrument,
     deleteInstrument
 } = require('../controllers/instrumentController');
+const { protect } = require('../middleware/authMiddleware')
 
-router.route('/').get(getInstrument).post(createInstrument);
-router.route('/:id').put(updateInstrument).delete(deleteInstrument)
+router.route('/').get(protect, getInstrument).post(protect, createInstrument);
+router.route('/:id').put(protect, updateInstrument).delete(protect, deleteInstrument)
 
 module.exports = router;

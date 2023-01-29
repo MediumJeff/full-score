@@ -6,8 +6,9 @@ const {
     updateEvent,
     deleteEvent
 } = require('../controllers/calendarController');
+const { protect } = require('../middleware/authMiddleware');
 
-router.route('/').get(getEvent).post(createEvent);
-router.route('/:id').put(updateEvent).delete(deleteEvent)
+router.route('/').get(getEvent).post(protect, createEvent);
+router.route('/:id').put(protect, updateEvent).delete(protect, deleteEvent)
 
 module.exports = router;
