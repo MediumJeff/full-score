@@ -8,7 +8,7 @@ const User = require('../models/userModel');
 // @desc Create new user and encrypt password
 // @route POST api/users
 // @access Public -- Admin accounts can only be created by other admin accounts
-// Account creation must be approved by admin to avoid unauthorized access, add approval Boolean in model?
+// Account creation must be approved by admin to avoid unauthorized access - add approval Boolean in model?
 const newUser = asyncHandler(async (req, res) => {
     const { firstName, lastName, email, accountType, admin, password } = req.body
     if(!firstName || !lastName || !email || !password) {
@@ -70,7 +70,7 @@ const loginUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400)
+        res.status(401)
         throw new Error('Invalid credentials.')
     }
 })
@@ -79,14 +79,14 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET api/users/user
 // @access Private upon login
 const getUser = asyncHandler(async (req, res) => {
-    const { _id, firstName, lastName, email } = await User.findById(req.body.id)
-
-    res.status(200).json({
-        id: _id,
-        firstName,
-        lastName,
-        email
-    })
+    let user
+    if (req.user.admin){
+        user = await User.find()
+        res.status(200).json(user)
+    } else {
+        user = await User.findById({id: req.user.id})
+        res.status(200).json(user)
+    }
 })
 
 // Generate web token (JWT)

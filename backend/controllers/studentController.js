@@ -10,7 +10,7 @@ const getStudent = asyncHandler(async (req, res) => {
         students = await Student.find()
         res.status(200).json(students)
     } else {
-        students = await Student.findOne({email: req.user.email})
+        students = await Student.findOne({id: req.user.id})
         res.status(200).json(students)
     }
 })
@@ -45,7 +45,7 @@ const createStudent = asyncHandler(async (req, res) => {
 const updateStudent = asyncHandler(async (req, res) => {
     const student = await Student.findById(req.params.id)
 
-    if (!student) {
+    if (!student || !req.params.id) {
         res.status(400)
         throw new Error('Student not found')
     }
@@ -64,16 +64,17 @@ const updateStudent = asyncHandler(async (req, res) => {
 const deleteStudent = asyncHandler(async (req, res) => {
     const student = await Student.findById(req.params.id)
 
+    if(req.user.admin){
+        await student.remove()
+        res.json(`Removed student ${req.params.id}`)
+        } else {
+            res.status(401)
+            throw new Error ('User not authorized.')
+        }
+
     if (!student) {
         res.status(400)
         throw new Error('Student not found')
-    }
-    if(req.user.admin){
-    await student.remove()
-    res.json(`Removed student ${req.params.id}`)
-    } else {
-        res.status(401)
-        throw new Error ('User not authorized.')
     }
 })
 

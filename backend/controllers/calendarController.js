@@ -13,6 +13,11 @@ const getEvent = asyncHandler(async (req,res) => {
 // @route POST api/calendar
 // @access Admin only
 const createEvent = asyncHandler(async (req, res) => {
+    if(!req.user.admin) {
+        res.status(403)
+        throw new Error('User not authorized.')
+    }
+
     const newEvent = await Event.create({
         eventName: req.body.eventName,
         eventDate: req.body.eventDate,
@@ -31,6 +36,11 @@ const createEvent = asyncHandler(async (req, res) => {
 // @route PUT api/calendar
 // @access Admin only
 const updateEvent = asyncHandler(async (req, res) => {
+    if(!req.user.admin) {
+        res.status(403)
+        throw new Error('User not authorized.')
+    }
+
     const event = await Event.findById(req.params.id)
 
     if(!event) {
@@ -49,6 +59,11 @@ const updateEvent = asyncHandler(async (req, res) => {
 // @route DELETE api/calendar
 // @access Admin only
 const deleteEvent = asyncHandler(async (req,res) => {
+    if(!req.user.admin) {
+        res.status(403)
+        throw new Error('User not authorized.')
+    }
+
     const event = await Event.findById(req.params.id)
 
     if(!event) {

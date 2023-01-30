@@ -10,7 +10,7 @@ const getInstrument = asyncHandler(async (req, res) => {
         instrument = await Instrument.find()
         res.status(200).json(instrument)
     } else {
-        res.status(401)
+        res.status(403)
         throw new Error('User not authorized.')
     }
 })
@@ -37,7 +37,7 @@ const createInstrument = asyncHandler(async (req, res) => {
 
         res.status(200).json(instrument)
     } else {
-        res.status(401)
+        res.status(403)
         throw new Error ('User not authorized.')
     }
 })
