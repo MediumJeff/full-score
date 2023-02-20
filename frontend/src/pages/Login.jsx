@@ -82,7 +82,7 @@ function Login() {
               id="password"
               name="password"
               value={password}
-              placeholder="Choose a password"
+              placeholder="Enter your password"
               onChange={onChange}
             />
           </div>
