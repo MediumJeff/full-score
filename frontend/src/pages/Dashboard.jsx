@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Calendar from "./Calendar";
 
 
 
@@ -27,6 +28,9 @@ function Dashboard() {
       ) : 
       null
       }
+    </div>
+    <div>
+      <Calendar />
     </div>
     </>
   )

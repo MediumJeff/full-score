@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { reset } from "../features/calendar/calendarSlice";
+import { newEvent, reset } from "../features/calendar/calendarSlice";
+import { FaCalendarAlt } from 'react-icons/fa';
 import Spinner from '../components/Spinner';
 
 function Calendar() {
-    const [formData, setFormData] = useState({
+    const [calendarData, setCalendarData] = useState({
         eventName: '',
         eventDate: new Date(),
         startTime: '',
@@ -14,18 +15,18 @@ function Calendar() {
         location: ''
     })
 
-    const { eventName, eventDate, startTime, endTime, location } = formData
-    
+    const { eventName, eventDate, startTime, endTime, location } = calendarData
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
     useEffect(() => {
-        if(isError) {
+        if (isError) {
             toast.error(message)
         }
-        if(isSuccess) {
+        if (isSuccess) {
             navigate('/calendar')
         }
 
@@ -33,12 +34,36 @@ function Calendar() {
     }, [user, isError, isSuccess, message, dispatch, navigate])
 
     const onChange = (e) => {
-        setFormData((prevState) => ({
+        setCalendarData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
     }
-    
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        if (!user.admin) {
+            toast.error('Must have admin account to alter calendar.')
+        } else {
+            dispatch(newEvent(calendarData))
+        }
+    }
+
+    if (isLoading) {
+        return <Spinner />
+    }
+
+    return (
+        <>
+            <section className="heading">
+                <h1>
+                    <FaCalendarAlt /> Calendar
+                </h1>
+            </section>
+        </>
+    )
+
 }
 
-    
+export default Calendar;
