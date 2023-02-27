@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { newEvent, reset } from "../features/calendar/calendarSlice";
 import { FaCalendarAlt } from 'react-icons/fa';
 import Spinner from '../components/Spinner';
+import CalendarDisplay from "../components/CalendarDisplay";
 
 function Calendar() {
     const [calendarData, setCalendarData] = useState({
@@ -61,6 +62,9 @@ function Calendar() {
                     <FaCalendarAlt /> Calendar
                 </h1>
             </section>
+            <div>
+                <CalendarDisplay />
+            </div>
         </>
     )
 
