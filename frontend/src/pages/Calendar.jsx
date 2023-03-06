@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { newEvent, reset } from "../features/calendar/calendarSlice";
+import { createEvent, getEvent, reset } from "../features/calendar/calendarSlice";
 import { FaCalendarAlt } from 'react-icons/fa';
 import Spinner from '../components/Spinner';
 import CalendarDisplay from "../components/CalendarDisplay";
@@ -30,8 +30,11 @@ function Calendar() {
         if (isSuccess) {
             navigate('/calendar')
         }
+        dispatch(getEvent())
 
-        dispatch(reset())
+        return () => {
+            dispatch(reset())
+        }
     }, [user, isError, isSuccess, message, dispatch, navigate])
 
     const onChange = (e) => {
@@ -47,7 +50,7 @@ function Calendar() {
         if (!user.admin) {
             toast.error('Must have admin account to alter calendar.')
         } else {
-            dispatch(newEvent(calendarData))
+            dispatch(createEvent(calendarData))
         }
     }
 

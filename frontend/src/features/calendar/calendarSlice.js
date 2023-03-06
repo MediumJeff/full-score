@@ -10,11 +10,11 @@ const initialState = {
 }
 
 // Create new event function
-export const newEvent = createAsyncThunk('calendar',
+export const createEvent = createAsyncThunk('calendar',
     async (calendarData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await calendarService.newEvent(calendarData, token)
+            return await calendarService.createEvent(calendarData, token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
             return thunkAPI.rejectWithValue(message)
@@ -23,10 +23,10 @@ export const newEvent = createAsyncThunk('calendar',
 )
 
 // Get events function
-export const getEvents = createAsyncThunk('calendar/eventsAll', async (_, thunkAPI) => {
+export const getEvent = createAsyncThunk('calendar/events', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await calendarService.getEvents(token)
+        return await calendarService.getEvent(token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         return thunkAPI.rejectWithValue(message)
@@ -34,7 +34,7 @@ export const getEvents = createAsyncThunk('calendar/eventsAll', async (_, thunkA
 })
 
 // Update event function
-export const updateEvent = createAsyncThunk('calendar/eventsAll',
+export const updateEvent = createAsyncThunk('calendar/eventUpdate',
     async (id, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -46,7 +46,7 @@ export const updateEvent = createAsyncThunk('calendar/eventsAll',
     })
 
 // Delete event function
-export const deleteEvent = createAsyncThunk('calendar/eventsAll',
+export const deleteEvent = createAsyncThunk('calendar/eventRemove',
     async (id, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -66,28 +66,28 @@ export const calendarSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(newEvent.pending, (state) => {
+            .addCase(createEvent.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(newEvent.fulfilled, (state, action) => {
+            .addCase(createEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.events.push(action.payload)
             })
-            .addCase(newEvent.rejected, (state, action) => {
+            .addCase(createEvent.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(getEvents.pending, (state) => {
+            .addCase(getEvent.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getEvents.fulfilled, (state, action) => {
+            .addCase(getEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.events = action.payload
             })
-            .addCase(getEvents.rejected, (state, action) => {
+            .addCase(getEvent.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

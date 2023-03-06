@@ -16,7 +16,7 @@ const newEvent = async(calendarData, token) => {
 }
 
 // Retrieve events
-const getEvents = async (token) => {
+const getEvent = async (token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -56,9 +56,9 @@ const deleteEvent = async(eventId, token) => {
 
 const calendarService = {
     newEvent,
-    getEvents,
+    getEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
 }
 
 export default calendarService;
