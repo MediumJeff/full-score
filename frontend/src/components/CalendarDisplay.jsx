@@ -25,29 +25,21 @@ const localizer = dateFnsLocalizer({
 
 function CalendarDisplay() {
 
-    const { events, isLoading, isError, message } = useSelector((state) => state.events)
-
-    const [eventsAll, setEventsAll] = useState(events)
-
-
-    useEffect(() => {
-        if(isError){
-            console.log(message)
-        }
-        
-        setEventsAll([...events])
-    }, [events, isError, message])
+    const { events, isLoading } = useSelector((state) => state.events)
 
     if(isLoading){
         return <Spinner />
     }
+
+    console.log(events)
 
     return (
         <>
         <div>
             <Calendar
                 localizer={localizer}
-                events={eventsAll}
+                events={events}
+                startAccessor="eventDate"
                 style={{ height: 500 }}
             />
         </div>
