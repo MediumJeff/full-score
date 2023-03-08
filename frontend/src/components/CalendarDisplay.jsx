@@ -21,36 +21,26 @@ const localizer = dateFnsLocalizer({
 })
 
 
-
 function CalendarDisplay() {
 
     const { events } = useSelector((state) => state.events)
 
-
-
     return (
         <>
-        <div>
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                style={{ height: 500 }}
-            />
-        </div>
-        <div>
-            <p>Event List</p>
-
-        </div>
-
+            <div>
+                <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 500 }}
+                />
+            </div>
+            <div>
+                <p>Event List</p>
+            </div>
         </>
     )
-
-    
 }
-
-
-
 
 export default CalendarDisplay;
