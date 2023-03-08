@@ -8,8 +8,6 @@ import getDay from 'date-fns/getDay';
 import enUS from "date-fns/locale/en-US"
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
-import Spinner from "../components/Spinner";
-import { getEvent } from "../features/calendar/calendarSlice";
 
 const locales = {
     "en-US": enUS
@@ -25,11 +23,8 @@ const localizer = dateFnsLocalizer({
 
 function CalendarDisplay() {
 
-    const { events, isLoading } = useSelector((state) => state.events)
-
-    if(isLoading){
-        return <Spinner />
-    }
+    const { events } = useSelector((state) => state.events)
+    const { user } = useSelector((state) => state.auth)
 
     console.log(events)
 
@@ -38,14 +33,22 @@ function CalendarDisplay() {
         <div>
             <Calendar
                 localizer={localizer}
-                events={events}
-                startAccessor="eventDate"
+
                 style={{ height: 500 }}
             />
+        </div>
+        <div>
+            <p>{user.firstName}</p>
+
         </div>
 
         </>
     )
+
+    
 }
+
+
+
 
 export default CalendarDisplay;
