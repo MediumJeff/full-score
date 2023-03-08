@@ -19,10 +19,11 @@ const createEvent = asyncHandler(async (req, res) => {
     }
 
     const newEvent = await Event.create({
-        eventName: req.body.eventName,
-        eventDate: req.body.eventDate,
-        eventStartTime: req.body.eventStartTime,
-        eventEndTime: req.body.eventEndTime
+        title: req.body.title,
+        start: new Date(req.body.start),
+        end: new Date(req.body.end),
+        location: req.body.location,
+        notes: req.body.notes
     })
     if(!req.body) {
         res.status(400)

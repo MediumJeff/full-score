@@ -4,23 +4,29 @@ const mongoose = require('mongoose');
 // May be a Front-end alteration for input and keep as String?
 
 const calendarSchema = mongoose.Schema({
-    eventName: {
+    title: {
         type: String,
         required: [true, 'Please enter a name for this event.']
     },
-    eventDate: {
+    start: {
         type: Date,
-        required: [true, 'Please enter the date of the event.'],
+        required: [true, 'Please enter the date and time of the event.'],
         min: [new Date(), 'Please enter a date in the future.']
     },
-    eventLocation: {
-        type: String
+    end: {
+        type: Date,
+        min: [function(){
+            const date = new Date(this.start)
+            const validDate = new Date(date.setHours(date.getHours()+1))
+            return validDate
+        }, "End time must be at least one hour past start time."],
+        default: function() {
+            const date = new Date(this.start)
+            return date.setDate(date.getDate()+1)
+        },
     },
-    eventStartTime: {
-        type: String
-    },
-    eventEndTime: {
-        type: String
+    location: {
+        name: String,
     },
     notes: {
         type: String
