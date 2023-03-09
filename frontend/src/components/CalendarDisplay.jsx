@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from "date-fns/format";
 import parse from "date-fns/parse";
@@ -35,9 +34,6 @@ function CalendarDisplay() {
                     endAccessor="end"
                     style={{ height: 500 }}
                 />
-            </div>
-            <div>
-                <p>Event List</p>
             </div>
         </>
     )

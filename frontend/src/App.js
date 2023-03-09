@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/Header';
 import Calendar from './pages/Calendar';
+import AddEvent from './components/AddEvent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/calendar' element={<Calendar />} />
+            <Route path='calendar/addEvent' element={<AddEvent />} />
           </Routes>
         </div>
       </Router>

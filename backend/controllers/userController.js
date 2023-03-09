@@ -44,6 +44,7 @@ const newUser = asyncHandler(async (req, res) => {
             _id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,
+            admin: user.admin,
             email: user.email,
             token: generateToken(user._id)
         })
@@ -67,6 +68,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,
+            admin: user.admin,
             token: generateToken(user._id)
         })
     } else {

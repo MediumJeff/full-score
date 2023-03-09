@@ -12,6 +12,7 @@ function Dashboard() {
   const { user } = useSelector(
     (state) => state.auth
     )
+  
 
   useEffect(() => {
     if(!user){
