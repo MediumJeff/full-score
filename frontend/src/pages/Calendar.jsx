@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -36,6 +36,12 @@ function Calendar() {
             </section>
             <div>
                 <CalendarDisplay />
+            </div>
+            <div>
+                {user && user.admin ? (
+                    <button className="btn">Add Event</button>
+                ) : null
+                }
             </div>
         </>
     )

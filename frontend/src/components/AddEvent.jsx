@@ -7,4 +7,4 @@ function AddEvent() {
   )
 }
 
-export default AddEvent
+export default AddEvent;
