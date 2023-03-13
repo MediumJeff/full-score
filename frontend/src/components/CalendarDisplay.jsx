@@ -27,6 +27,7 @@ function CalendarDisplay() {
         }),
         []
     )
+    
 
     return (
         <>
@@ -34,8 +35,8 @@ function CalendarDisplay() {
                 <Calendar
                     localizer={localizer}
                     events={events}
-                    startAccessor="start"
-                    endAccessor="end"
+                    startAccessor={(events) => {return new Date(events.start)}}
+                    endAccessor={(events) => {return new Date(events.end)}}
                     style={{ height: 500 }}
                     defaultDate={defaultDate}
                     formats={formats}

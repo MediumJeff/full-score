@@ -20,8 +20,8 @@ const createEvent = asyncHandler(async (req, res) => {
 
     const newEvent = await Event.create({
         title: req.body.title,
-        start: new Date(req.body.start),
-        end: new Date(req.body.end),
+        start: Date(req.body.start),
+        end: Date(req.body.end),
         location: req.body.location,
         notes: req.body.notes
     })

@@ -11,19 +11,12 @@ const calendarSchema = mongoose.Schema({
     start: {
         type: Date,
         required: [true, 'Please enter the date and time of the event.'],
-        min: [new Date(), 'Please enter a date in the future.']
+        min: [Date(), 'Please enter a date in the future.'],
     },
     end: {
         type: Date,
-        min: [function(){
-            const date = new Date(this.start)
-            const validDate = new Date(date.setHours(date.getHours()+1))
-            return validDate
-        }, "End time must be at least one hour past start time."],
-        default: function() {
-            const date = new Date(this.start)
-            return date.setDate(date.getDate()+1)
-        },
+        required: [true, 'Please enter the end date and time of the event'],
+        min: [this.start]
     },
     location: {
         name: String,

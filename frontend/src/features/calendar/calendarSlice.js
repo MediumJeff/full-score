@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import calendarService from "./calendarService";
 
 const initialState = {
-    events: [],
+    events: '',
     isError: false,
     isSuccess: false,
     isLoading: false,
