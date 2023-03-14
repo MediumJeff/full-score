@@ -18,7 +18,7 @@ function Calendar() {
             toast.error(message)
         }
         if (isSuccess) {
-            navigate('/calendar')
+            navigate('/')
         }
         dispatch(getEvent())
 
@@ -26,6 +26,10 @@ function Calendar() {
             dispatch(reset())
         }
     }, [user, isError, isSuccess, message, dispatch, navigate])
+
+    const onClick = () => {
+        navigate('/addEvent')
+    }
 
     return (
         <>
@@ -39,7 +43,7 @@ function Calendar() {
             </div>
             <div>
                 {user && user.admin ? (
-                    <button className="btn">Add Event</button>
+                    <button className="btn" onClick={onClick}>Add Event</button>
                 ) : null
                 }
             </div>

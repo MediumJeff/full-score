@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = '/api/calendar/';
 
 // Create new event
-const newEvent = async(calendarData, token) => {
+const createEvent = async(calendarData, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -55,7 +55,7 @@ const deleteEvent = async(eventId, token) => {
 }
 
 const calendarService = {
-    newEvent,
+    createEvent,
     getEvent,
     updateEvent,
     deleteEvent,

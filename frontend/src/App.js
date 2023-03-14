@@ -19,7 +19,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/calendar' element={<Calendar />} />
-            <Route path='calendar/addEvent' element={<AddEvent />} />
+            <Route path='/addEvent' element={<AddEvent />} />
           </Routes>
         </div>
       </Router>
