@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createEvent, reset } from '../features/calendar/calendarSlice';
+import { createEvent, getEvent, reset } from '../features/calendar/calendarSlice';
 import Spinner from '../components/Spinner';
 
 
@@ -10,8 +10,8 @@ function AddEvent() {
 
   const [calendarData, setCalendarData] = useState({
     title: '',
-    start: '',
-    end: '',
+    start: Date.toISOString,
+    end: Date.toISOString,
     location: '',
     notes: ''
   })
@@ -49,8 +49,11 @@ function AddEvent() {
     } else {
       dispatch(reset())
     }
+
     dispatch(createEvent(calendarData))
+    dispatch(getEvent())
     navigate('/')
+    console.log(calendarData)
     }
 
 
