@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser, FaCalendarAlt } from 'react-icons/fa';
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaCalendarAlt, FaSchool } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
@@ -21,13 +21,31 @@ function Header() {
                 <Link to='/'>Full Score</Link>
             </div>
             <ul>
-                {user ? (
+                {user && user.admin ? (
+                    <>
+                        <li>
+                            <Link to='/student'>
+                                <FaSchool /> Students
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='/calendar'>
+                                <FaCalendarAlt /> Calendar
+                            </Link>
+                        </li>
+                        <li>
+                            <button className='btn' onClick={onLogout}>
+                                <FaSignOutAlt /> Logout
+                            </button>
+                        </li>
+                    </>
+                ) : user ? (
                     <li>
                         <button className='btn' onClick={onLogout}>
                             <FaSignOutAlt /> Logout
                         </button>
                     </li>
-                ) :
+                ) : 
                     (<>
                         <li>
                             <Link to='/login'>
