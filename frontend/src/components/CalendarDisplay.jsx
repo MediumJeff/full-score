@@ -8,10 +8,10 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const localizer = momentLocalizer(moment)
 
-
 function CalendarDisplay() {
     const { events } = useSelector((state) => state.events)
 
+    // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
         () => ({
             defaultDate: new Date(),
@@ -27,7 +27,6 @@ function CalendarDisplay() {
         }),
         []
     )
-    
 
     return (
         <>
@@ -35,8 +34,8 @@ function CalendarDisplay() {
                 <Calendar
                     localizer={localizer}
                     events={events}
-                    startAccessor={(events) => {return new Date(events.start)}}
-                    endAccessor={(events) => {return new Date(events.end)}}
+                    startAccessor={(events) => { return new Date(events.start) }}
+                    endAccessor={(events) => { return new Date(events.end) }}
                     style={{ height: 500 }}
                     defaultDate={defaultDate}
                     formats={formats}
