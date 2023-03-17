@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-// Fix time inputs to take actual time inputs
-// May be a Front-end alteration for input and keep as String?
 
 const calendarSchema = mongoose.Schema({
     title: {
@@ -19,7 +17,7 @@ const calendarSchema = mongoose.Schema({
         min: [this.start]
     },
     location: {
-        name: String,
+        type: String,
     },
     notes: {
         type: String
