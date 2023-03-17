@@ -27,6 +27,7 @@ function CalendarDisplay() {
         []
     )
 
+    // TODO: Make Dialog via MUI to send to edit/delete functions
     const doubleClickHandler = (e) => {
         window.alert(JSON.stringify(e, null, 4))
     }
