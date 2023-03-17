@@ -28,6 +28,10 @@ function CalendarDisplay() {
         []
     )
 
+    const doubleClickHandler = (e) => {
+        window.alert(JSON.stringify(e, null, 4))
+    }
+
     return (
         <>
             <div>
@@ -40,6 +44,10 @@ function CalendarDisplay() {
                     defaultDate={defaultDate}
                     formats={formats}
                     views={views}
+                    scrollToTime={new Date()}
+                    selectable
+                    popup
+                    onDoubleClickEvent={doubleClickHandler}
                 />
             </div>
         </>
