@@ -1,5 +1,6 @@
 
-function EditEvent(props) {
+
+function EditEvent() {
 
     return (
         <div>EditEvent</div>

@@ -5,7 +5,6 @@ import moment from 'moment';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 const localizer = momentLocalizer(moment)
 
 function CalendarDisplay() {

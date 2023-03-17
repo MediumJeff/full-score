@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Header from './components/Header';
 import Calendar from './pages/Calendar';
 import AddEvent from './components/AddEvent';
+import EditEvent from './components/EditEvent';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/calendar' element={<Calendar />} />
             <Route path='/addEvent' element={<AddEvent />} />
+            <Route path='/calendar/:id' element={<EditEvent />} />
           </Routes>
         </div>
       </Router>
