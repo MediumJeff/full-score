@@ -21,7 +21,6 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/calendar' element={<Calendar />} />
             <Route path='/addEvent' element={<AddEvent />} />
-            <Route path='/calendar/:id' element={<EditEvent />} />
           </Routes>
         </div>
       </Router>

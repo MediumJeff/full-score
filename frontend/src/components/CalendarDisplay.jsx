@@ -1,14 +1,19 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
+import EditEvent from "./EditEvent";
 
 const localizer = momentLocalizer(moment)
 
 function CalendarDisplay() {
     const { events } = useSelector((state) => state.events)
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
@@ -27,10 +32,11 @@ function CalendarDisplay() {
         []
     )
 
-    // TODO: Make Dialog via MUI to send to edit/delete functions
-    const doubleClickHandler = (e) => {
+    // TODO: Make Dialog via MUI to send to edit/delete functions? Separate page?
+    const handleEventSelection = (e) => {
         window.alert(JSON.stringify(e, null, 4))
-    }
+      };
+
 
     return (
         <>
@@ -47,7 +53,7 @@ function CalendarDisplay() {
                     scrollToTime={new Date()}
                     selectable
                     popup
-                    onDoubleClickEvent={doubleClickHandler}
+                    onSelectEvent={handleEventSelection}
                 />
             </div>
         </>

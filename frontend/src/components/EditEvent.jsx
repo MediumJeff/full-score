@@ -1,10 +1,12 @@
 
 
-function EditEvent() {
+const EditEvent = (props) => {
 
     return (
-        <div>EditEvent</div>
+        <div>
+            <p> {JSON.stringify(props.eventInfo)} </p>
+        </div>
     )
 }
 
-export default EditEvent;
+export default EditEvent
