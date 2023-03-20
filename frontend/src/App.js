@@ -7,7 +7,6 @@ import Register from './pages/Register';
 import Header from './components/Header';
 import Calendar from './pages/Calendar';
 import AddEvent from './components/AddEvent';
-import EditEvent from './components/EditEvent';
 
 function App() {
   return (
