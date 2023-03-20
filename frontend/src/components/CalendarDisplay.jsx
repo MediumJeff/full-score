@@ -11,6 +11,7 @@ const localizer = momentLocalizer(moment)
 function CalendarDisplay() {
     const { events } = useSelector((state) => state.events)
 
+
     // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
         () => ({
@@ -30,10 +31,10 @@ function CalendarDisplay() {
 
     // TODO: Make Dialog via MUI to send to edit/delete functions? React-bootstrap modal?
     // Try to avoid separate page if at all possible
-    const handleEventSelection = (e) => {
-        
-    };
 
+    const handleSelectedEvent = (e) => {
+        alert(`Event name: ${e.title}\nEvent start: ${new Date(e.start).toLocaleDateString()}, ${new Date(e.start).toLocaleTimeString()}\nEvent end: ${new Date(e.end).toLocaleDateString()}, ${new Date(e.end).toLocaleTimeString()}\nLocation: ${e.location}\nAdditional information: ${e.notes}`)
+    }
 
     return (
         <>
@@ -50,7 +51,7 @@ function CalendarDisplay() {
                     scrollToTime={new Date()}
                     selectable
                     popup
-                    onSelectEvent={handleEventSelection}
+                    onSelectEvent={handleSelectedEvent}
                 />
             </div>
         </>
