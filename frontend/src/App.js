@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/Header';
-import Calendar from './pages/Calendar';
+import CalendarEvents from './pages/Calendar';
 import AddEvent from './components/AddEvent';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
             <Route path='/' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/calendar' element={<Calendar />} />
+            <Route path='/calendar' element={<CalendarEvents />} />
             <Route path='/addEvent' element={<AddEvent />} />
           </Routes>
         </div>

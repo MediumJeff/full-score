@@ -53,7 +53,6 @@ function AddEvent() {
     dispatch(createEvent(calendarData))
     dispatch(getEvent())
     navigate('/')
-    console.log(calendarData)
     }
 
 

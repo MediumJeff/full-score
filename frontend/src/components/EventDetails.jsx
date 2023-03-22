@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-const EventDetails = () => {
+const EventDetails = ({ props }) => {
+
+
   return (
     <div>Event Details</div>
   )
