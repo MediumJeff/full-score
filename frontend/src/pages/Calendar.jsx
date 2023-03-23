@@ -41,12 +41,14 @@ function CalendarEvents() {
     }
 
     const [show, setShow] = useState(false);
-    const [eventData, setEventData] = useState({})
-    const handleClose = () => setShow(false);
+    const [eventData, setEventData] = useState([...events])
+    const handleClose = () => {
+        setShow(false)
+    };
 
     const handleShow = (e) => {
-        setShow(true)
         setEventData(e)
+        setShow(true)
     };
 
     // Details for react-big-calendar display
@@ -91,12 +93,12 @@ function CalendarEvents() {
             </div>
             <div>
                 {user && user.admin ? (
-                    <button className="btn" onClick={newEvent}>Add Event</button>
+                    <button className="btn" variant="primary" onClick={newEvent}>Add Event</button>
                 ) : null
                 }
             </div>
             <div>
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={show}>
                     <Modal.Header>
                         <Modal.Title>Event Details</Modal.Title>
                     </Modal.Header>
@@ -111,11 +113,20 @@ function CalendarEvents() {
                         </Button>
                         {user && user.admin ? (
                             <>
-                                <Button variant="success" active>Edit Event</Button>{' '}
-                                <Button variant="danger" active onClick={() => {
-                                    dispatch(deleteEvent(eventData._id))
-                                    handleClose()
-                                }}>Delete Event</Button>{' '}
+                                <Button variant="success" onClick={() => {
+                                    if (show) {
+                                        console.log('event edited')
+                                        handleClose()
+                                    }
+                                }
+                                }>Edit Event</Button>{' '}
+                                <Button variant="danger" onClick={() => {
+                                    if (eventData._id) {
+                                        dispatch(deleteEvent(eventData._id))
+                                        handleClose()
+                                    }
+                                }
+                                }>Delete Event</Button>{' '}
                             </>
                         ) : null
                         }
@@ -124,7 +135,6 @@ function CalendarEvents() {
             </div>
         </>
     )
-
 }
 
 export default CalendarEvents;

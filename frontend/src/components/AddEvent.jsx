@@ -10,8 +10,8 @@ function AddEvent() {
 
   const [calendarData, setCalendarData] = useState({
     title: '',
-    start: Date.toISOString,
-    end: Date.toISOString,
+    start: '',
+    end: '',
     location: '',
     notes: ''
   })

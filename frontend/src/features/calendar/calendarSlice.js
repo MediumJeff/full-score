@@ -47,7 +47,7 @@ export const updateEvent = createAsyncThunk('calendar/eventUpdate',
     })
 
 // Delete event function
-export const deleteEvent = createAsyncThunk('calendar/eventRemove',
+export const deleteEvent = createAsyncThunk('calendar/delete',
     async (id, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -112,7 +112,7 @@ export const calendarSlice = createSlice({
             .addCase(deleteEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.events = state.events.filter((event) => event._id !== action.payload.id)
+                state.events = state.events.filter((event) => event !== action.payload)
             })
             .addCase(deleteEvent.rejected, (state, action) => {
                 state.isLoading = false
