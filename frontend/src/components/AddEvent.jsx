@@ -46,13 +46,14 @@ function AddEvent() {
 
     if (!user.admin) {
       toast.error('Must have admin account to alter calendar')
+    } else if (calendarData.end < calendarData.start) {
+      toast.error('End time must be after start time.')
+      navigate('/addEvent')
     } else {
-      dispatch(reset())
+      dispatch(createEvent(calendarData))
+      navigate('/')
     }
-
-    dispatch(createEvent(calendarData))
-    navigate('/')
-    }
+  }
 
 
   if (isLoading) {
@@ -70,7 +71,7 @@ function AddEvent() {
             <input type="text" className="form-control" id="title" name="title" value={title} placeholder='Enter the title for the event' onChange={onChange} />
           </div>
           <div className="form-group">
-          <label htmlFor="start">Enter the starting date and time</label>
+            <label htmlFor="start">Enter the starting date and time</label>
             <input type="datetime-local" className="form-control" id="start" name="start" value={start} onChange={onChange} />
           </div>
           <div className="form-group">

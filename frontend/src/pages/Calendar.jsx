@@ -40,8 +40,10 @@ function CalendarEvents() {
         navigate('/addEvent')
     }
 
+    // Display event details in a modal.
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([])
+
     const handleClose = () => {
         setShow(false)
     };
@@ -50,7 +52,6 @@ function CalendarEvents() {
         setEventData(e)
         setShow(true)
     };
-
 
     // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
@@ -68,6 +69,7 @@ function CalendarEvents() {
         }),
         []
     )
+
 
     return (
         <>
@@ -87,7 +89,6 @@ function CalendarEvents() {
                     formats={formats}
                     views={views}
                     scrollToTime={new Date()}
-                    selectable
                     popup
                     onSelectEvent={handleShow}
                 />
@@ -112,20 +113,17 @@ function CalendarEvents() {
                         <Button variant="primary" onClick={handleClose}>
                             Close
                         </Button>
+                        {/* Edit and Delete options for admin accounts */}
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                    if (show) {
                                         console.log('event edited')
                                         handleClose()
-                                    }
                                 }
                                 }>Edit Event</Button>{' '}
                                 <Button variant="danger" onClick={() => {
-                                    if (eventData._id) {
-                                        dispatch(deleteEvent(eventData._id))
                                         handleClose()
-                                    }
+                                        dispatch(deleteEvent(eventData._id))
                                 }
                                 }>Delete Event</Button>{' '}
                             </>
