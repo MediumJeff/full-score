@@ -109,7 +109,7 @@ export const calendarSlice = createSlice({
             })
             .addCase(deleteEvent.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.events = state.events.filter((event) => {return event !== action.payload})
+                state.events = state.events.filter((event) => event !== action.payload)
                 state.message = action.payload
             })
             .addCase(deleteEvent.rejected, (state, action) => {

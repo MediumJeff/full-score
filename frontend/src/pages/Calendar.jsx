@@ -34,11 +34,8 @@ function CalendarEvents() {
         return () => {
             dispatch(reset())
         }
-    }, [user, isError, isSuccess, message, dispatch, navigate])
+    }, [isError, isSuccess, message, dispatch, navigate])
 
-    const newEvent = () => {
-        navigate('/addEvent')
-    }
 
     // Display event details in a modal.
     const [show, setShow] = useState(false);
@@ -52,6 +49,14 @@ function CalendarEvents() {
         setEventData(e)
         setShow(true)
     };
+
+    const newEvent = () => {
+        navigate('/addEvent')
+    }
+
+    const removeEvent = () => {
+        dispatch(deleteEvent(eventData._id))
+    }
 
     // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
@@ -117,15 +122,14 @@ function CalendarEvents() {
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                        console.log('event edited')
-                                        handleClose()
+                                    console.log('event edited')
+                                    handleClose()
                                 }
                                 }>Edit Event</Button>{' '}
                                 <Button variant="danger" onClick={() => {
-                                        handleClose()
-                                        dispatch(deleteEvent(eventData._id))
-                                }
-                                }>Delete Event</Button>{' '}
+                                    removeEvent()
+                                    handleClose()
+                                }}>Delete Event</Button>{' '}
                             </>
                         ) : null
                         }
