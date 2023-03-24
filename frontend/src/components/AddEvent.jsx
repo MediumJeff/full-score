@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createEvent, getEvent, reset } from '../features/calendar/calendarSlice';
+import { createEvent, reset } from '../features/calendar/calendarSlice';
 import Spinner from '../components/Spinner';
 
 
@@ -51,7 +51,6 @@ function AddEvent() {
     }
 
     dispatch(createEvent(calendarData))
-    dispatch(getEvent())
     navigate('/')
     }
 

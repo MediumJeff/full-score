@@ -41,7 +41,7 @@ function CalendarEvents() {
     }
 
     const [show, setShow] = useState(false);
-    const [eventData, setEventData] = useState([...events])
+    const [eventData, setEventData] = useState([])
     const handleClose = () => {
         setShow(false)
     };
@@ -50,6 +50,7 @@ function CalendarEvents() {
         setEventData(e)
         setShow(true)
     };
+
 
     // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
