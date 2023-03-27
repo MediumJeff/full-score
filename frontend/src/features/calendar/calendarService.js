@@ -28,6 +28,7 @@ const getEvent = async (token) => {
     return response.data
 }
 
+
 // Update event
 const updateEvent = async(eventId, token) => {
     const config = {

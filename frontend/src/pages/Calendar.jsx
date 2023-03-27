@@ -82,7 +82,7 @@ function CalendarEvents() {
 
     return (
         <>
-        {/* Main dispaly of monthly calendar */}
+            {/* Main dispaly of monthly calendar */}
             <section className="heading">
                 <h1>
                     <FaCalendarAlt /> Calendar
@@ -129,10 +129,11 @@ function CalendarEvents() {
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                    console.log('event edited')
+                                    navigate('/update/' + eventData._id)
                                     handleClose()
                                 }
-                                }>Edit Event</Button>{' '}
+                                }
+                                >Edit Event</Button>{' '}
                                 <Button variant="danger" onClick={() => {
                                     removeEvent()
                                     handleClose()

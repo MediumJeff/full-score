@@ -8,6 +8,7 @@ import Spinner from '../components/Spinner';
 
 function AddEvent() {
 
+  // Create state for form information based on schema in backend model
   const [calendarData, setCalendarData] = useState({
     title: '',
     start: '',
@@ -17,9 +18,11 @@ function AddEvent() {
   })
 
   const { title, start, end, location, notes } = calendarData
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  // Get user info from state to verify admin status
   const { user, isLoading, isSuccess, isError, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
@@ -33,6 +36,7 @@ function AddEvent() {
     dispatch(reset())
   }, [user, isSuccess, isError, message, navigate, dispatch])
 
+  // Store form data and send to MongoAtlas
   const onChange = (e) => {
     setCalendarData((prevState) => ({
       ...prevState,
@@ -51,15 +55,14 @@ function AddEvent() {
       navigate('/addEvent')
     } else {
       dispatch(createEvent(calendarData))
-      dispatch(reset())
       navigate('/')
     }
   }
 
-
   if (isLoading) {
     return <Spinner />
   }
+
 
   return (
     <>
