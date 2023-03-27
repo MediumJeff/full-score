@@ -16,6 +16,7 @@ const localizer = momentLocalizer(moment)
 
 function CalendarEvents() {
 
+    // Get user info and pull event info from MongoAtlas
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -34,7 +35,7 @@ function CalendarEvents() {
         return () => {
             dispatch(reset())
         }
-    }, [isError, isSuccess, message, dispatch, navigate])
+    }, [user, isError, isSuccess, message, dispatch, navigate])
 
 
     // Display event details in a modal.
@@ -50,12 +51,15 @@ function CalendarEvents() {
         setShow(true)
     };
 
+    // Add or delete an event and refresh page to reflect changes
+    // TODO: Add confirmation option for deletion
     const newEvent = () => {
         navigate('/addEvent')
     }
 
     const removeEvent = () => {
         dispatch(deleteEvent(eventData._id))
+        window.location.reload(true)
     }
 
     // Details for react-big-calendar display
@@ -78,6 +82,7 @@ function CalendarEvents() {
 
     return (
         <>
+        {/* Main dispaly of monthly calendar */}
             <section className="heading">
                 <h1>
                     <FaCalendarAlt /> Calendar
@@ -98,12 +103,14 @@ function CalendarEvents() {
                     onSelectEvent={handleShow}
                 />
             </div>
+            {/* Add Event button only available to admin users */}
             <div>
                 {user && user.admin ? (
                     <button className="btn" variant="primary" onClick={newEvent}>Add Event</button>
                 ) : null
                 }
             </div>
+            {/* Modal with event details */}
             <div>
                 <Modal show={show}>
                     <Modal.Header>

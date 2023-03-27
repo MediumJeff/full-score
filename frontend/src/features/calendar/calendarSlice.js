@@ -63,7 +63,12 @@ export const calendarSlice = createSlice({
     name: 'event',
     initialState,
     reducers: {
-        reset: (state) => initialState
+        reset: (state) => {
+            state.events = []
+            state.isLoading = false
+            state.isSuccess = false
+            state.isError = false
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -108,7 +113,8 @@ export const calendarSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(deleteEvent.fulfilled, (state, action) => {
-                state.isLoading = false
+                state.isLoading = true
+                state.isSuccess = true
                 state.events = state.events.filter((event) => event !== action.payload)
                 state.message = action.payload
             })

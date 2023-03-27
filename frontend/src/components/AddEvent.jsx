@@ -51,6 +51,7 @@ function AddEvent() {
       navigate('/addEvent')
     } else {
       dispatch(createEvent(calendarData))
+      dispatch(reset())
       navigate('/')
     }
   }
