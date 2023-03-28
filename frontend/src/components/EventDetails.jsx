@@ -1,9 +1,12 @@
 
+
+
 const EventDetails = () => {
 
-
   return (
-    <div>Event Details</div>
+    <div>
+      <p>Update Interface</p>
+    </div>
   )
 }
 

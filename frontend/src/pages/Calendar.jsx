@@ -129,7 +129,7 @@ function CalendarEvents() {
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                    navigate('/update/' + eventData._id)
+                                    console.log(eventData)
                                     handleClose()
                                 }
                                 }
