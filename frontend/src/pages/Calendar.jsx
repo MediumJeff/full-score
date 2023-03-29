@@ -11,10 +11,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
+
 const localizer = momentLocalizer(moment)
 
 
-function CalendarEvents() {
+export default function CalendarEvents() {
 
     // Get user info and pull event info from MongoAtlas
     const navigate = useNavigate()
@@ -129,8 +130,7 @@ function CalendarEvents() {
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                    console.log(eventData)
-                                    handleClose()
+                                    navigate('/calendar/events/' + eventData._id)
                                 }
                                 }
                                 >Edit Event</Button>{' '}
@@ -148,4 +148,3 @@ function CalendarEvents() {
     )
 }
 
-export default CalendarEvents;

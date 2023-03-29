@@ -33,7 +33,6 @@ export const getEvent = createAsyncThunk('calendar/events', async (_, thunkAPI) 
     }
 })
 
-
 // Update event function
 export const updateEvent = createAsyncThunk('calendar/update/:id',
     async (id, thunkAPI) => {

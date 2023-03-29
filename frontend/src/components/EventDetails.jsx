@@ -1,12 +1,15 @@
-
+import React from 'react'
 
 
 const EventDetails = () => {
 
+  console.log()
+
   return (
     <div>
-      <p>Update Interface</p>
+      EventDetails
     </div>
+
   )
 }
 
