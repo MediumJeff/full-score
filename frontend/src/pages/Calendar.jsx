@@ -40,7 +40,7 @@ export default function CalendarEvents() {
 
     // Display event details in a modal.
     const [show, setShow] = useState(false);
-    const [eventData, setEventData] = useState([])
+    const [eventData, setEventData] = useState([]);
 
     const handleClose = () => {
         setShow(false)
@@ -63,7 +63,7 @@ export default function CalendarEvents() {
     }
 
     const updateEvent = () => {
-        navigate('/update/' + eventData._id)
+        handleClose()
     }
 
     // Details for react-big-calendar display

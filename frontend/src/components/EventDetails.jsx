@@ -9,6 +9,7 @@ const EventDetails = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  
 
   return (
     <>
