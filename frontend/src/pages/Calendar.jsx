@@ -10,7 +10,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import EventDetails from "../components/EventDetails";
 
 const localizer = momentLocalizer(moment)
 
@@ -42,7 +41,6 @@ export default function CalendarEvents() {
     // Display event details in a modal.
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([])
-    const [eventToUpdate, setEventToUpdate] = useState([])
 
     const handleClose = () => {
         setShow(false)
@@ -64,9 +62,8 @@ export default function CalendarEvents() {
         window.location.reload(true)
     }
 
-    const updateEvent = (e) => {
-        setEventToUpdate(e)
-        navigate('/update')
+    const updateEvent = () => {
+        navigate('/update/' + eventData._id)
     }
 
     // Details for react-big-calendar display
@@ -153,4 +150,3 @@ export default function CalendarEvents() {
         </>
     )
 }
-

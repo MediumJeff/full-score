@@ -34,7 +34,7 @@ export const getEvent = createAsyncThunk('calendar/events', async (_, thunkAPI) 
 })
 
 // Update event function
-export const updateEvent = createAsyncThunk('calendar/update/:id',
+export const updateEvent = createAsyncThunk('calendar/update',
     async (id, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token

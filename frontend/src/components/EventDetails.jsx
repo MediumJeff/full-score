@@ -1,15 +1,22 @@
-import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+
 
 
 const EventDetails = () => {
 
-  console.log()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
 
   return (
-    <div>
-      EventDetails
-    </div>
-
+    <>
+      <div>
+        Update Event
+      </div>
+      <Button variant="primary" active onClick={() => navigate('/')}>Cancel</Button>
+    </>
   )
 }
 
