@@ -24,10 +24,7 @@ const protect = asyncHandler(async (req, res, next) => {
         }
     }
 
-    if(!token) {
-        res.status(401)
-        throw new Error('User not authorized, no token created.')
-    }
+
 })
 
 module.exports = { protect }

@@ -2,13 +2,14 @@ import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getEvent, deleteEvent, reset } from "../features/calendar/calendarSlice";
+import { getEvent, deleteEvent, updateEvent, reset } from "../features/calendar/calendarSlice";
 import { FaCalendarAlt } from 'react-icons/fa';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 const localizer = momentLocalizer(moment)
@@ -41,6 +42,7 @@ export default function CalendarEvents() {
     // Display event details in a modal.
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([]);
+    const [editShow, setEditShow] = useState(false)
 
     const handleClose = () => {
         setShow(false)
@@ -62,9 +64,24 @@ export default function CalendarEvents() {
         window.location.reload(true)
     }
 
-    const updateEvent = () => {
+    const updateEventModal = () => {
         handleClose()
+        setEditShow(true)
     }
+
+    const changeEvent = () => {
+        dispatch(updateEvent(eventData._id))
+        setEditShow(false)
+    }
+
+    const onChange = (e) => {
+        setEventData((prevState) => ({
+          ...prevState,
+          [e.target.name]: e.target.value
+        })
+        )
+      }
+
 
     // Details for react-big-calendar display
     const { defaultDate, formats, views } = useMemo(
@@ -133,7 +150,7 @@ export default function CalendarEvents() {
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                    updateEvent()
+                                    updateEventModal()
                                 }
                                 }
                                 >Edit Event</Button>{' '}
@@ -144,6 +161,42 @@ export default function CalendarEvents() {
                             </>
                         ) : null
                         }
+                    </Modal.Footer>
+                </Modal>
+            </div>
+            {/* Additional modal to edit event details */}
+            <div>
+                <Modal show={editShow}>
+                    <Modal.Header>
+                        <Modal.Title>Update Event</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="eventName">
+                                <Form.Label>Event name:</Form.Label>
+                                <Form.Control type="text" value={eventData.title} onChange={onChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="eventStartTime">
+                                <Form.Label>Event start: {new Date(eventData.start).toLocaleString()}</Form.Label>
+                                <Form.Control type="datetime-local" onChange={onChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="eventEndTime">
+                                <Form.Label>Event end: {new Date(eventData.end).toLocaleString()}</Form.Label>
+                                <Form.Control type="datetime-local" onChange={onChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="eventLocation">
+                                <Form.Label>Event location:</Form.Label>
+                                <Form.Control type="text" placeholder={eventData.location} onChange={onChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="eventNotes">
+                                <Form.Label>Additional information:</Form.Label>
+                                <Form.Control type="text" value={eventData.notes} onChange={onChange} />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" active onClick={() => { setEditShow(false) }}>Cancel</Button>
+                        <Button variant="success" active onClick={() => changeEvent()} >Save Changes</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

@@ -99,9 +99,10 @@ export const calendarSlice = createSlice({
                 state.isLoading = true
             })
             // Not a push statement? Updating file from database need action.payload?
-            .addCase(updateEvent.fulfilled, (state) => {
+            .addCase(updateEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
+                state.events.push(action.payload._id)
             })
             .addCase(updateEvent.rejected, (state, action) => {
                 state.isLoading = false

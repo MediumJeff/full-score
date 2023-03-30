@@ -1,16 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 
 
 
-const EventDetails = () => {
+const EventDetails = (props) => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  
-
+  console.log(props)
   return (
     <>
       <div>
