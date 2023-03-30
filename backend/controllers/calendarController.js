@@ -34,7 +34,7 @@ const createEvent = asyncHandler(async (req, res) => {
 })
 
 // @desc Update existing event
-// @route PUT api/calendar
+// @route PUT api/calendar/:id
 // @access Admin only
 const updateEvent = asyncHandler(async (req, res) => {
     if(!req.user.admin) {

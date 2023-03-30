@@ -43,6 +43,7 @@ export default function CalendarEvents() {
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([]);
     const [editShow, setEditShow] = useState(false)
+    const [updatedEvent, setUpdatedEvent] = useState(eventData)
 
     const handleClose = () => {
         setShow(false)
@@ -70,7 +71,8 @@ export default function CalendarEvents() {
     }
 
     const changeEvent = () => {
-        dispatch(updateEvent(eventData._id))
+        setUpdatedEvent(eventData)
+        console.log(updatedEvent)
         setEditShow(false)
     }
 

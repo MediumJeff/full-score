@@ -10,7 +10,7 @@ const initialState = {
 }
 
 // Create new event function
-export const createEvent = createAsyncThunk('calendar',
+export const createEvent = createAsyncThunk('calendar/create',
     async (calendarData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -59,7 +59,7 @@ export const deleteEvent = createAsyncThunk('calendar/delete',
 
 // Calendar reducers
 export const calendarSlice = createSlice({
-    name: 'event',
+    name: 'events',
     initialState,
     reducers: {
         reset: (state) => {
@@ -98,11 +98,9 @@ export const calendarSlice = createSlice({
             .addCase(updateEvent.pending, (state) => {
                 state.isLoading = true
             })
-            // Not a push statement? Updating file from database need action.payload?
-            .addCase(updateEvent.fulfilled, (state, action) => {
+            .addCase(updateEvent.fulfilled, (state) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.events.push(action.payload._id)
             })
             .addCase(updateEvent.rejected, (state, action) => {
                 state.isLoading = false
