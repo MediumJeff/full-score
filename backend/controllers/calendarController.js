@@ -9,6 +9,11 @@ const getEvent = asyncHandler(async (req,res) => {
     res.status(200).json(events)
 })
 
+const getEventById = asyncHandler(async (req, res) => {
+    const eventById = await Event.findById(req.params.id)
+    res.status(200).json(eventById)
+})
+
 // @desc Create new event
 // @route POST api/calendar
 // @access Admin only
@@ -37,15 +42,10 @@ const createEvent = asyncHandler(async (req, res) => {
 // @route PUT api/calendar/:id
 // @access Admin only
 const updateEvent = asyncHandler(async (req, res) => {
-    if(!req.user.admin) {
-        res.status(403)
-        throw new Error('User not authorized.')
-    }
-
     const event = await Event.findById(req.params.id)
 
     if(!event) {
-        res.status(400)
+        res.status(401)
         throw new Error('Event not found.')
     }
 
@@ -78,6 +78,7 @@ const deleteEvent = asyncHandler(async (req,res) => {
 
 module.exports = {
     getEvent,
+    getEventById,
     createEvent,
     updateEvent,
     deleteEvent

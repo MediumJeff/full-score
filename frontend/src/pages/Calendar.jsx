@@ -83,6 +83,7 @@ export default function CalendarEvents() {
           toast.error('Must have admin account to alter calendar')
         } else {
           dispatch(updateEvent(updatedEvent._id))
+          console.log(updatedEvent)
           handleClose()
         }
       }

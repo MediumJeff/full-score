@@ -20,10 +20,22 @@ const getEvent = async (token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        },
     }
 
     const response = await axios.get(API_URL, config)
+
+    return response.data
+}
+
+const getEventById = async(eventId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+
+    const response = await axios.get(API_URL + eventId, config)
 
     return response.data
 }
@@ -33,9 +45,8 @@ const getEvent = async (token) => {
 const updateEvent = async(eventId, token) => {
     const config = {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
         },
-        mode: "cors"
     }
 
     const response = await axios.put(API_URL + eventId, config)
@@ -59,6 +70,7 @@ const deleteEvent = async(eventId, token) => {
 const calendarService = {
     createEvent,
     getEvent,
+    getEventById,
     updateEvent,
     deleteEvent,
 }
