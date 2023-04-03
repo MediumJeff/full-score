@@ -23,7 +23,7 @@ export const createEvent = createAsyncThunk('calendar/create',
 )
 
 // Get events function
-export const getEvent = createAsyncThunk('calendar/events', async (_, thunkAPI) => {
+export const getEvent = createAsyncThunk('calendar', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await calendarService.getEvent(token)
@@ -98,9 +98,22 @@ export const calendarSlice = createSlice({
             .addCase(updateEvent.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(updateEvent.fulfilled, (state) => {
+            .addCase(updateEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
+                state.events.map((item, index) => {
+                    if(item._id === action.payload._id) {
+                        return {
+                            ...item,
+                            title: action.payload.title,
+                            start: action.payload.start,
+                            end: action.payload.end,
+                            location: action.payload.location,
+                            notes: action.payload.notes
+                        }
+                    }
+                    return item;
+                })
             })
             .addCase(updateEvent.rejected, (state, action) => {
                 state.isLoading = false
@@ -111,7 +124,7 @@ export const calendarSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(deleteEvent.fulfilled, (state, action) => {
-                state.isLoading = true
+                state.isLoading = false
                 state.isSuccess = true
                 state.events = state.events.filter((event) => event !== action.payload)
                 state.message = action.payload

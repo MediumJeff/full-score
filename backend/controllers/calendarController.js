@@ -49,7 +49,7 @@ const updateEvent = asyncHandler(async (req, res) => {
         throw new Error('Event not found.')
     }
 
-    const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedEvent = await Event.findByIdAndUpdate(req.params._id, req.body, {
         new: true
     })
 

@@ -62,18 +62,12 @@ export default function CalendarEvents() {
 
     const removeEvent = () => {
         dispatch(deleteEvent(eventData._id))
-        window.location.reload(true)
+        // window.location.reload(true)
     }
 
     const updateEventModal = () => {
         handleClose()
         setEditShow(true)
-    }
-
-    const changeEvent = () => {
-        dispatch(updateEvent(updatedEvent))
-        console.log(updatedEvent)
-        setEditShow(false)
     }
 
     const onChange = (e) => {
@@ -83,6 +77,16 @@ export default function CalendarEvents() {
         })
         )
       }
+
+      const onSubmit = () => {
+        if (!user.admin) {
+          toast.error('Must have admin account to alter calendar')
+        } else {
+          dispatch(updateEvent(updatedEvent._id))
+          handleClose()
+        }
+      }
+
 
 
     // Details for react-big-calendar display
@@ -199,7 +203,7 @@ export default function CalendarEvents() {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" active onClick={() => { setEditShow(false) }}>Cancel</Button>
-                        <Button variant="success" active onClick={() => changeEvent()} >Save Changes</Button>
+                        <Button variant="success" active onClick={() => { onSubmit() }} >Save Changes</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

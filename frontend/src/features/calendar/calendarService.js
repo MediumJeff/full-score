@@ -6,8 +6,8 @@ const API_URL = '/api/calendar/';
 const createEvent = async(calendarData, token) => {
     const config = {
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+            Authorization: `Bearer ${token}`,
+        },
     }
 
     const response = await axios.post(API_URL, calendarData, config)
@@ -34,7 +34,8 @@ const updateEvent = async(eventId, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        },
+        mode: "cors"
     }
 
     const response = await axios.put(API_URL + eventId, config)
