@@ -193,11 +193,11 @@ export default function CalendarEvents() {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventLocation">
                                 <Form.Label>Event location:</Form.Label>
-                                <Form.Control type="text" name="location" value={new Date(updatedEvent.location)} placeholder={updatedEvent.location} onChange={onChange} />
+                                <Form.Control type="text" name="location" value={updatedEvent.location} placeholder={updatedEvent.location} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventNotes">
                                 <Form.Label>Additional information:</Form.Label>
-                                <Form.Control type="text" name="notes" value={new Date(updatedEvent.notes)} placeholder={updatedEvent.notes} onChange={onChange} />
+                                <Form.Control type="text" name="notes" value={updatedEvent.notes} placeholder={updatedEvent.notes} onChange={onChange} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
