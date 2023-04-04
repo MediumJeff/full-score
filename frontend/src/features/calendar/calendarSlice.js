@@ -108,15 +108,14 @@ export const calendarSlice = createSlice({
             .addCase(updateEvent.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(updateEvent.fulfilled, (state, action) => {
+            .addCase(updateEvent.fulfilled, (state) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.events = action.payload
             })
             .addCase(updateEvent.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.message = action.payload
+                state.events = action.payload
             })
             .addCase(deleteEvent.pending, (state) => {
                 state.isLoading = true

@@ -43,7 +43,7 @@ export default function CalendarEvents() {
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([]);
     const [editShow, setEditShow] = useState(false)
-    const [updatedEvent, setUpdatedEvent] = useState([])
+    const [updatedEvent, setUpdatedEvent] = useState({})
 
     const handleClose = () => {
         setShow(false)
@@ -62,7 +62,7 @@ export default function CalendarEvents() {
 
     const removeEvent = () => {
         dispatch(deleteEvent(eventData._id))
-        // window.location.reload(true)
+        window.location.reload(true)
     }
 
     const updateEventModal = () => {
@@ -71,22 +71,21 @@ export default function CalendarEvents() {
     }
 
     const onChange = (e) => {
-        setUpdatedEvent((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value
+        setUpdatedEvent((eventData) => ({
+            ...eventData,
+            [e.target.name]: e.target.value
         })
         )
-      }
+    }
 
-      const onSubmit = () => {
+    const onSubmit = () => {
         if (!user.admin) {
-          toast.error('Must have admin account to alter calendar')
+            toast.error('Must have admin account to alter calendar')
         } else {
-          dispatch(updateEvent(updatedEvent._id))
-          console.log(updatedEvent)
-          handleClose()
+            dispatch(updateEvent(updatedEvent._id))
+            handleClose()
         }
-      }
+    }
 
 
 
@@ -145,8 +144,8 @@ export default function CalendarEvents() {
                         <Modal.Title>Event Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>Event Name: {eventData.title}</Modal.Body>
-                    <Modal.Body>Start: {new Date(eventData.start).toLocaleDateString()}, {new Date(eventData.start).toLocaleTimeString()}</Modal.Body>
-                    <Modal.Body>End: {new Date(eventData.end).toLocaleDateString()}, {new Date(eventData.end).toLocaleTimeString()}</Modal.Body>
+                    <Modal.Body>Start: {new Date(eventData.start).toLocaleString()}</Modal.Body>
+                    <Modal.Body>End: {new Date(eventData.end).toLocaleString()}</Modal.Body>
                     <Modal.Body>Location: {eventData.location}</Modal.Body>
                     <Modal.Body>Additional Information: {eventData.notes}</Modal.Body>
                     <Modal.Footer>
@@ -186,19 +185,19 @@ export default function CalendarEvents() {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventStartTime">
                                 <Form.Label>Event start: {new Date(updatedEvent.start).toLocaleString()}</Form.Label>
-                                <Form.Control type="datetime-local" name="start" onChange={onChange} />
+                                <Form.Control type="datetime-local" name="start" value={updatedEvent.start} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventEndTime">
                                 <Form.Label>Event end: {new Date(updatedEvent.end).toLocaleString()}</Form.Label>
-                                <Form.Control type="datetime-local" name="end" onChange={onChange} />
+                                <Form.Control type="datetime-local" name="end" value={updatedEvent.end} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventLocation">
                                 <Form.Label>Event location:</Form.Label>
-                                <Form.Control type="text" name="location" placeholder={updatedEvent.location} onChange={onChange} />
+                                <Form.Control type="text" name="location" value={new Date(updatedEvent.location)} placeholder={updatedEvent.location} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventNotes">
                                 <Form.Label>Additional information:</Form.Label>
-                                <Form.Control type="text" name="notes" placeholder={updatedEvent.notes} onChange={onChange} />
+                                <Form.Control type="text" name="notes" value={new Date(updatedEvent.notes)} placeholder={updatedEvent.notes} onChange={onChange} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
