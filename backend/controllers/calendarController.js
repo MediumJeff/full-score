@@ -50,12 +50,7 @@ const updateEvent = asyncHandler(async (req, res) => {
     }
 
     const updatedEvent = await Event.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        start: req.body.start,
-        end: req.body.end,
-        location: req.body.location,
-        notes: req.body.notes
-
+        $set: req.body
     }, {
         new: true
     })

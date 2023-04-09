@@ -66,13 +66,14 @@ export default function CalendarEvents() {
     }
 
     const updateEventModal = () => {
+        setUpdatedEvent(eventData)
         handleClose()
         setEditShow(true)
     }
 
     const onChange = (e) => {
-        setUpdatedEvent((updatedEvent) => ({
-            ...updatedEvent,
+        setUpdatedEvent((prevState) => ({
+            ...prevState,
             [e.target.name]: e.target.value
         })
         )
@@ -81,10 +82,10 @@ export default function CalendarEvents() {
     const onSubmit = () => {
         if (!user.admin) {
             toast.error('Must have admin account to alter calendar')
-        } else {
-            dispatch(updateEvent(updatedEvent._id))
-            handleClose()
         }
+        dispatch(updateEvent(updatedEvent._id))
+        console.log(updatedEvent)
+        handleClose()
     }
 
 
@@ -156,7 +157,6 @@ export default function CalendarEvents() {
                         {user && user.admin ? (
                             <>
                                 <Button variant="success" onClick={() => {
-                                    setUpdatedEvent(eventData)
                                     updateEventModal()
                                 }
                                 }
@@ -180,24 +180,24 @@ export default function CalendarEvents() {
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="eventName">
-                                <Form.Label>Event name:</Form.Label>
+                                <Form.Label>Event name: </Form.Label>
                                 <Form.Control type="text" name="title" value={updatedEvent.title} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventStartTime">
-                                <Form.Label>Event start: {new Date(updatedEvent.start).toLocaleString()}</Form.Label>
-                                <Form.Control type="datetime-local" name="start" value={updatedEvent.start} onChange={onChange} />
+                                <Form.Label>Event start: {new Date(eventData.start).toLocaleString()}</Form.Label>
+                                <Form.Control type="datetime-local" name="start" value={new Date(updatedEvent.start).toISO} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventEndTime">
-                                <Form.Label>Event end: {new Date(updatedEvent.end).toLocaleString()}</Form.Label>
-                                <Form.Control type="datetime-local" name="end" value={updatedEvent.end} onChange={onChange} />
+                                <Form.Label>Event end: {new Date(eventData.end).toLocaleString()}</Form.Label>
+                                <Form.Control type="datetime-local" name="end" value={new Date(updatedEvent.end).toISO} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventLocation">
-                                <Form.Label>Event location:</Form.Label>
-                                <Form.Control type="text" name="location" value={updatedEvent.location} placeholder={updatedEvent.location} onChange={onChange} />
+                                <Form.Label>Event location: </Form.Label>
+                                <Form.Control type="text" name="location" value={updatedEvent.location} onChange={onChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="eventNotes">
-                                <Form.Label>Additional information:</Form.Label>
-                                <Form.Control type="text" name="notes" value={updatedEvent.notes} placeholder={updatedEvent.notes} onChange={onChange} />
+                                <Form.Label>Additional information: </Form.Label>
+                                <Form.Control type="text" name="notes" value={updatedEvent.notes} onChange={onChange} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
