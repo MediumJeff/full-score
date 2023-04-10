@@ -55,11 +55,11 @@ export default function CalendarEvents() {
     };
 
     // Add or delete an event and refresh page to reflect changes
-    // TODO: Add confirmation option for deletion
     const newEvent = () => {
         navigate('/addEvent')
     }
 
+    // TODO: Add confirmation option for deletion
     const removeEvent = () => {
         dispatch(deleteEvent(eventData._id))
         window.location.reload(true)
@@ -72,13 +72,10 @@ export default function CalendarEvents() {
     }
 
     const onChange = (e) => {
-        setUpdatedEvent({...eventData, [e.target.name]: e.target.value})
+        setUpdatedEvent({ ...updatedEvent, [e.target.name]: e.target.value })
     }
 
-    const onSubmit = () => {
-        if (!user.admin) {
-            toast.error('Must have admin account to alter calendar')
-        }
+    const editEvent = () => {
         dispatch(updateEvent(updatedEvent._id))
         console.log(updatedEvent)
         handleClose()
@@ -167,7 +164,7 @@ export default function CalendarEvents() {
                     </Modal.Footer>
                 </Modal>
             </div>
-            {/* Additional modal to edit event details */}
+            {/* Additional modal to edit event details. Admin only. */}
             <div>
                 <Modal show={editShow}>
                     <Modal.Header>
@@ -199,7 +196,7 @@ export default function CalendarEvents() {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" active onClick={() => { setEditShow(false) }}>Cancel</Button>
-                        <Button variant="success" active onClick={() => { onSubmit() }} >Save Changes</Button>
+                        <Button variant="success" active onClick={() => { editEvent() }} >Save Changes</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

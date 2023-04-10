@@ -111,18 +111,7 @@ export const calendarSlice = createSlice({
             .addCase(updateEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.events = state.events.map((event) => {
-                    if (event._id === action.payload._id) {
-                        return {
-                            title: action.payload.title,
-                            start: action.payload.start,
-                            end: action.payload.end,
-                            location: action.payload.location,
-                            notes: action.payload.notes
-                        }
-                    }
-                    return event;
-                })
+                state.events = action.payload._id
             })
             .addCase(updateEvent.rejected, (state) => {
                 state.isLoading = false
