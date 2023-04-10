@@ -43,7 +43,7 @@ export default function CalendarEvents() {
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([]);
     const [editShow, setEditShow] = useState(false)
-    const [updatedEvent, setUpdatedEvent] = useState([])
+    const [updatedEvent, setUpdatedEvent] = useState({})
 
     const handleClose = () => {
         setShow(false)
@@ -72,11 +72,7 @@ export default function CalendarEvents() {
     }
 
     const onChange = (e) => {
-        setUpdatedEvent((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        })
-        )
+        setUpdatedEvent({...eventData, [e.target.name]: e.target.value})
     }
 
     const onSubmit = () => {
