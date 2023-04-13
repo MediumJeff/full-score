@@ -43,7 +43,7 @@ export default function CalendarEvents() {
     const [show, setShow] = useState(false);
     const [eventData, setEventData] = useState([]);
     const [editShow, setEditShow] = useState(false)
-    const [updatedEvent, setUpdatedEvent] = useState({})
+    const [updatedEvent, setUpdatedEvent] = useState([])
 
     const handleClose = () => {
         setShow(false)
@@ -75,12 +75,11 @@ export default function CalendarEvents() {
         setUpdatedEvent({ ...updatedEvent, [e.target.name]: e.target.value })
     }
 
-    const editEvent = () => {
+   const editEvent = () => {
         dispatch(updateEvent(updatedEvent._id))
         console.log(updatedEvent)
         handleClose()
     }
-
 
 
     // Details for react-big-calendar display

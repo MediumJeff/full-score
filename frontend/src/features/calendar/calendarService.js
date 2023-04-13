@@ -45,7 +45,7 @@ const getEventById = async(eventId, token) => {
 const updateEvent = async(eventId, token) => {
     const config = {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`
         },
     }
 

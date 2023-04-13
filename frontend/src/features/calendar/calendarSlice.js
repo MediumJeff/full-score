@@ -112,6 +112,7 @@ export const calendarSlice = createSlice({
                 state.isLoading = false
                 state.isSuccess = true
                 state.events = action.payload._id
+                console.log(action.payload)
             })
             .addCase(updateEvent.rejected, (state) => {
                 state.isLoading = false
