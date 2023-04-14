@@ -75,7 +75,7 @@ export default function CalendarEvents() {
         setUpdatedEvent({ ...updatedEvent, [e.target.name]: e.target.value })
     }
 
-   const editEvent = () => {
+    const editEvent = () => {
         dispatch(updateEvent(updatedEvent._id))
         console.log(updatedEvent)
         setEditShow(false)
@@ -195,7 +195,7 @@ export default function CalendarEvents() {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" active onClick={() => { setEditShow(false) }}>Cancel</Button>
-                        <Button variant="success" active onClick={() => { editEvent() }} >Save Changes</Button>
+                        <Button variant="success" type="submit" active onClick={() => { editEvent() }} >Save Changes</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

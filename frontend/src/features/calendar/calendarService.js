@@ -42,14 +42,14 @@ const getEventById = async(eventId, token) => {
 
 
 // Update event
-const updateEvent = async(eventId, token) => {
+const updateEvent = async(eventId, eventData, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         },
     }
 
-    const response = await axios.patch(API_URL + eventId, config)
+    const response = await axios.put(API_URL + eventId, eventData, config)
 
     return response.data
 }

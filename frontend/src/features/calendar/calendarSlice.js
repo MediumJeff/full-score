@@ -45,10 +45,10 @@ export const getEventById = createAsyncThunk('calendar/', async (id, thunkAPI) =
 
 // Update event function
 export const updateEvent = createAsyncThunk('calendar/update',
-    async (id, thunkAPI) => {
+    async ({ id, eventData }, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await calendarService.updateEvent(id, token)
+            return await calendarService.updateEvent(id, eventData, token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
             return thunkAPI.rejectWithValue(message)
@@ -111,8 +111,10 @@ export const calendarSlice = createSlice({
             .addCase(updateEvent.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.events = action.payload._id
-                console.log(action.payload)
+                const eventIndex = state.events.findIndex(event => event.id === action.payload.id);
+                if (eventIndex !== -1) {
+                    state.events[eventIndex] = action.payload;
+                }
             })
             .addCase(updateEvent.rejected, (state) => {
                 state.isLoading = false
