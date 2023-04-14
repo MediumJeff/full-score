@@ -49,7 +49,7 @@ const updateEvent = async(eventId, token) => {
         },
     }
 
-    const response = await axios.put(API_URL + eventId, config)
+    const response = await axios.patch(API_URL + eventId, config)
 
     return response.data
 }

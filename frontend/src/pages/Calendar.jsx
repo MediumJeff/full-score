@@ -78,7 +78,7 @@ export default function CalendarEvents() {
    const editEvent = () => {
         dispatch(updateEvent(updatedEvent._id))
         console.log(updatedEvent)
-        handleClose()
+        setEditShow(false)
     }
 
 
@@ -171,23 +171,23 @@ export default function CalendarEvents() {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group className="mb-3" controlId="eventName">
+                            <Form.Group className="mb-3" controlId="title">
                                 <Form.Label>Event name: </Form.Label>
                                 <Form.Control type="text" name="title" value={updatedEvent.title} onChange={onChange} />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="eventStartTime">
+                            <Form.Group className="mb-3" controlId="start">
                                 <Form.Label>Event start: {new Date(eventData.start).toLocaleString()}</Form.Label>
                                 <Form.Control type="datetime-local" name="start" value={new Date(updatedEvent.start).toISO} onChange={onChange} />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="eventEndTime">
+                            <Form.Group className="mb-3" controlId="end">
                                 <Form.Label>Event end: {new Date(eventData.end).toLocaleString()}</Form.Label>
                                 <Form.Control type="datetime-local" name="end" value={new Date(updatedEvent.end).toISO} onChange={onChange} />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="eventLocation">
+                            <Form.Group className="mb-3" controlId="location">
                                 <Form.Label>Event location: </Form.Label>
                                 <Form.Control type="text" name="location" value={updatedEvent.location} onChange={onChange} />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="eventNotes">
+                            <Form.Group className="mb-3" controlId="notes">
                                 <Form.Label>Additional information: </Form.Label>
                                 <Form.Control type="text" name="notes" value={updatedEvent.notes} onChange={onChange} />
                             </Form.Group>
