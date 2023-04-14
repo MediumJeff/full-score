@@ -76,9 +76,10 @@ export default function CalendarEvents() {
     }
 
     const editEvent = () => {
-        dispatch(updateEvent(updatedEvent._id))
+        dispatch(updateEvent({id: updatedEvent._id, eventData: updatedEvent}))
         console.log(updatedEvent)
         setEditShow(false)
+        window.location.reload(true)
     }
 
 
