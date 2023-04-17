@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser, FaCalendarAlt, FaSchool } from 'react-icons/fa';
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaCalendarAlt, FaSchool, FaClipboardList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
@@ -24,8 +24,13 @@ function Header() {
                 {user && user.admin ? (
                     <>
                         <li>
-                            <Link to='/student'>
+                            <Link to='/students'>
                                 <FaSchool /> Students
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='/inventory'>
+                                <FaClipboardList /> Inventory
                             </Link>
                         </li>
                         <li>

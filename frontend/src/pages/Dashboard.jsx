@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Calendar from "./Calendar";
 
 
-
 function Dashboard() {
 
   const navigate = useNavigate()
@@ -22,7 +21,7 @@ function Dashboard() {
 
   return (
     <>
-    <div>Dashboard</div>
+    <div>My School Band</div>
     <div>
       {user ? (
         <p>Welcome {user.firstName} {user.lastName}</p>
