@@ -1,14 +1,21 @@
 import React from 'react';
 import { FaClipboardList } from 'react-icons/fa';
 
+
+
 const Inventory = () => {
   return (
-    <div>
+    <>
+      <div>
         <h1>
-        <FaClipboardList />Inventory
+          <FaClipboardList />Inventory
         </h1>
-    </div>
+      </div>
+      <div className='inventoryTable'>
+        
+      </div>
+    </>
   )
 }
 
-export default Inventory
+export default Inventory;
