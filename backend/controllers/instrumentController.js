@@ -5,14 +5,13 @@ const Instrument = require('../models/instrumentModel');
 // @route GET /api/instruments
 // @access Only available to account administrators
 const getInstrument = asyncHandler(async (req, res) => {
-    let instrument
-    if (req.user.admin) {
-        instrument = await Instrument.find()
-        res.status(200).json(instrument)
-    } else {
-        res.status(403)
-        throw new Error('User not authorized.')
-    }
+    const instrument = await Instrument.find()
+    res.status(200).json(instrument)
+})
+
+const getInstById = asyncHandler(async (req, res) => {
+    const instById = await Instrument.findById(req.params.id)
+    res.status(200).json(instById)
 })
 
 // BEWARE of optional items within schema. See how they play out.
@@ -81,6 +80,7 @@ const deleteInstrument = asyncHandler(async (req, res) => {
 
 module.exports = {
     getInstrument,
+    getInstById,
     createInstrument,
     updateInstrument,
     deleteInstrument,

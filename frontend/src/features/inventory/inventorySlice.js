@@ -23,7 +23,7 @@ export const createInstrument = createAsyncThunk('instruments/create',
 )
 
 // Get instruments function
-export const getInstrument = createAsyncThunk('instruments', async (_, thunkAPI) => {
+export const getInstrument = createAsyncThunk('inventory', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await inventoryService.getInstrument(token)
@@ -126,7 +126,7 @@ export const inventorySlice = createSlice({
             .addCase(deleteInstrument.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.instruments = state.instruments.filter((inst) => isnt !== action.payload)
+                state.instruments = state.instruments.filter((inst) => inst !== action.payload)
                 state.message = action.payload
             })
             .addCase(deleteInstrument.rejected, (state, action) => {
