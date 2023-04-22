@@ -23,7 +23,9 @@ const Inventory = () => {
   const itemDisplay = (e) => {
     setItemDetail(e)
     setShow(true)
+
   }
+
 
   const handleClose = () => {
     setShow(false)
@@ -84,6 +86,7 @@ const Inventory = () => {
       <div>
         <Button variant="primary" active className='btn'>Add New</Button>
       </div>
+      {/* Modal to display instrument details */}
       <div>
         <Modal show={show}>
           <Modal.Header>
@@ -95,7 +98,9 @@ const Inventory = () => {
             <p>Model: {itemDetail.model}</p>
             <p>Serial No.: {itemDetail.serialNumber}</p>
             <p>Notes: {itemDetail.damageNotes}</p>
-            <p>Assigned to: {}</p>
+            <p>Assigned to: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.studentAssigned) : null}</p>
+            <p>Date out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.dateOut) : null}</p>
+            <p>Date in: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.dateIn) : null}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleClose}>Close</Button>
