@@ -99,7 +99,7 @@ const Inventory = () => {
             <p>Serial No.: {itemDetail.serialNumber}</p>
             <p>Notes: {itemDetail.damageNotes}</p>
             <p>Assigned to: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.studentAssigned) : null}</p>
-            <p>Date out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.dateOut) : null}</p>
+            <p>Date out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toLocaleDateString()) : null}</p>
             <p>Date in: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.dateIn) : null}</p>
           </Modal.Body>
           <Modal.Footer>
