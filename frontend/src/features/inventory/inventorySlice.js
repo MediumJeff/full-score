@@ -11,10 +11,10 @@ const initialState = {
 
 // Create new instrument function
 export const createInstrument = createAsyncThunk('instruments/create',
-    async (instData, thunkAPI) => {
+    async (instrumentData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await inventoryService.createInstrument(instData, token)
+            return await inventoryService.createInstrument(instrumentData, token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
             return thunkAPI.rejectWithValue(message)
@@ -23,7 +23,7 @@ export const createInstrument = createAsyncThunk('instruments/create',
 )
 
 // Get instruments function
-export const getInstrument = createAsyncThunk('inventory', async (_, thunkAPI) => {
+export const getInstrument = createAsyncThunk('instruments', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await inventoryService.getInstrument(token)

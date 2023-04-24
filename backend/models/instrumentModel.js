@@ -29,8 +29,7 @@ const instrumentSchema = mongoose.Schema({
         required: [true, 'Please enter a serial number.'],
     },
     schoolNumber: {
-        type: String,
-        unique: [true, 'That number is already in use.']
+        type: String
     }, 
     assignedTo: {
         type: [assignmentSchema],

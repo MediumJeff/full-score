@@ -9,7 +9,9 @@ import Header from './components/Header';
 import CalendarEvents from './pages/Calendar';
 import AddEvent from './components/AddEvent';
 import Inventory from './pages/Inventory';
+import AddInstrument from './components/AddInstrument';
 import Students from './pages/Students';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
             <Route path='/calendar' element={<CalendarEvents />} />
             <Route path='/addEvent' element={<AddEvent />} />
             <Route path='/inventory' element={<Inventory />} />
+            <Route path='/addInstrument' element={<AddInstrument />} />
             <Route path='/students' element={<Students />} />
           </Routes>
         </div>

@@ -17,20 +17,6 @@ const Inventory = () => {
   const { user, isError, isSuccess, message } = useSelector((state) => state.auth)
   const { instruments } = useSelector((state) => state.instruments)
 
-  const [itemDetail, setItemDetail] = useState([])
-  const [show, setShow] = useState(false)
-
-  const itemDisplay = (e) => {
-    setItemDetail(e)
-    setShow(true)
-
-  }
-
-
-  const handleClose = () => {
-    setShow(false)
-  }
-
   useEffect(() => {
     if (isError) {
       toast.error(message)
@@ -44,6 +30,46 @@ const Inventory = () => {
       dispatch(reset())
     }
   }, [user, isError, isSuccess, message, dispatch, navigate])
+
+  const [itemDetail, setItemDetail] = useState([])
+  const [show, setShow] = useState(false)
+  const [updatedItem, setUpdatedItem] = useState([])
+  const [editModal, setEditModal] = useState(false)
+
+  const itemDisplay = (e) => {
+    setItemDetail(e)
+    setShow(true)
+  }
+
+  const handleClose = () => {
+    setShow(false)
+  }
+
+  const removeItem = () => {
+    dispatch(deleteInstrument(updatedItem._id))
+    window.location.reload(true)
+  }
+
+  const updateItemModal = () => {
+    setEditModal(true)
+    setUpdatedItem(itemDetail)
+    handleClose()
+  }
+
+  const onChange = (e) => {
+    setUpdatedItem({ ...updatedItem, [e.target.name]: e.target.value })
+  }
+
+  const editItem = () => {
+    dispatch(updateInstrument({ id: updatedItem._id, itemDetail: updatedItem }))
+    setEditModal(false)
+    window.location.reload(true)
+  }
+
+  const newInstrument = () => {
+    navigate('/addInstrument')
+  }
+
 
 
   return (
@@ -84,7 +110,7 @@ const Inventory = () => {
         </Table>
       </div>
       <div>
-        <Button variant="primary" active className='btn'>Add New</Button>
+        <Button variant="primary" active className='btn' onClick={newInstrument}>Add New</Button>
       </div>
       {/* Modal to display instrument details */}
       <div>
@@ -99,11 +125,15 @@ const Inventory = () => {
             <p>Serial No.: {itemDetail.serialNumber}</p>
             <p>Notes: {itemDetail.damageNotes}</p>
             <p>Assigned to: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.studentAssigned) : null}</p>
-            <p>Date out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toLocaleDateString()) : null}</p>
-            <p>Date in: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.dateIn) : null}</p>
+            <p>Date Out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toLocaleDateString()) : null}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleClose}>Close</Button>
+            <Button variant="success" onClick={() => { editModal() }}>Update</Button>
+            <Button variant="danger" onClick={() => {
+              removeItem()
+              handleClose()
+            }}>Delete</Button>
           </Modal.Footer>
         </Modal>
       </div>
