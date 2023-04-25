@@ -46,7 +46,7 @@ const Inventory = () => {
   }
 
   const removeItem = () => {
-    dispatch(deleteInstrument(updatedItem._id))
+    dispatch(deleteInstrument(itemDetail._id))
     window.location.reload(true)
   }
 

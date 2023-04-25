@@ -55,6 +55,7 @@ function AddInstrument() {
 
     } else {
       dispatch(createInstrument(instrumentData))
+      navigate('/inventory')
       console.log(instrumentData)
     }
   }

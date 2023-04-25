@@ -114,7 +114,7 @@ export default function CalendarEvents() {
                     events={events}
                     startAccessor={(events) => { return new Date(events.start) }}
                     endAccessor={(events) => { return new Date(events.end) }}
-                    style={{ height: 500 }}
+                    style={{ height: 700 }}
                     defaultDate={defaultDate}
                     formats={formats}
                     views={views}
