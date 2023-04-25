@@ -45,10 +45,10 @@ export const getEventById = createAsyncThunk('instruments/', async (id, thunkAPI
 
 // Update event function
 export const updateInstrument = createAsyncThunk('instruments/update',
-    async ({ id, instData }, thunkAPI) => {
+    async ({ instId, instData }, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await inventoryService.updateEvent(id, instData, token)
+            return await inventoryService.updateInstrument(instId, instData, token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
             return thunkAPI.rejectWithValue(message)

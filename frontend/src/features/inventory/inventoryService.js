@@ -28,14 +28,14 @@ const getInstrument = async (token) => {
     return response.data
 }
 
-const getInstById = async(eventId, token) => {
+const getInstById = async(instId, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         },
     }
 
-    const response = await axios.get(API_URL + eventId, config)
+    const response = await axios.get(API_URL + instId, config)
 
     return response.data
 }

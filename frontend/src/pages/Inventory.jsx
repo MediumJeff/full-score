@@ -2,7 +2,7 @@ import { FaClipboardList } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { toast } from 'react-toastify';
 import { getInstrument, deleteInstrument, updateInstrument, reset } from '../features/inventory/inventorySlice';
@@ -61,9 +61,9 @@ const Inventory = () => {
   }
 
   const editItem = () => {
-    dispatch(updateInstrument({ id: updatedItem._id, itemDetail: updatedItem }))
+    dispatch(updateInstrument({ instId: updatedItem._id, instData: updatedItem }))
     setEditModal(false)
-    window.location.reload(true)
+    //window.location.reload(true)
   }
 
   const newInstrument = () => {
@@ -129,11 +129,63 @@ const Inventory = () => {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleClose}>Close</Button>
-            <Button variant="success" onClick={() => { editModal() }}>Update</Button>
+            <Button variant="success" onClick={() => { updateItemModal() }}>Update</Button>
             <Button variant="danger" onClick={() => {
               removeItem()
               handleClose()
             }}>Delete</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+      {/* Additional modal to edit instrument details. Admin only. */}
+      <div>
+        <Modal show={editModal}>
+          <Modal.Header>
+            <Modal.Title>Update Instrument</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="title">
+                <Form.Label>Instrument Type: </Form.Label>
+                <Form.Control type="text" name="type" value={updatedItem.type} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="make">
+                <Form.Label>Make: {updatedItem.make}</Form.Label>
+                <Form.Control type="text" name="make" value={updatedItem.make} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="model">
+                <Form.Label>Model: </Form.Label>
+                <Form.Control type="text" name="model" value={updatedItem.model} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="serialNumber">
+                <Form.Label>Serial Number: </Form.Label>
+                <Form.Control type="text" name="serialNumber" value={updatedItem.serialNumber} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="schoolNumber">
+                <Form.Label>School Number: </Form.Label>
+                <Form.Control type="text" name="schoolNumber" value={updatedItem.schoolNumber} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="assignedTo">
+                <Form.Label>Assigned to:  </Form.Label>
+                <Form.Control type="text" name="assignedTo" value={(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.studentAssigned) : null} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="dateOut">
+                <Form.Label>Date Out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toLocaleDateString()) : null}</Form.Label>
+                <Form.Control type="datetime-local" name="dateOut" value={(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toISO) : null} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="dateIn">
+                <Form.Label>Date In: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateIn).toLocaleDateString()) : null}</Form.Label>
+                <Form.Control type="datetime-local" name="dateIn" value={(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateIn).toLocaleDateString()) : null} onChange={onChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="damageNotes">
+                <Form.Label>Notes: </Form.Label>
+                <Form.Control type="text" name="damageNotes" value={updatedItem.damageNotes} onChange={onChange} />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" active onClick={() => { setEditModal(false) }}>Cancel</Button>
+            <Button variant="success" type="submit" active onClick={() => { editItem() }} >Save Changes</Button>
           </Modal.Footer>
         </Modal>
       </div>
