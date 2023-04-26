@@ -26,7 +26,9 @@ const createInstrument = asyncHandler(async (req, res) => {
             model: req.body.model,
             serialNumber: req.body.serialNumber,
             schoolNumber: req.body.schoolNumber,
-            assignedTo: req.body.assignedTo,
+            studentAssigned: req.body.studentAssigned,
+            dateOut: req.body.dateOut,
+            dateIn: req.body.dateIn,
             damageNotes: req.body.damageNotes
         })
         if (!req.body.type) {

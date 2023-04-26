@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-const assignmentSchema = mongoose.Schema({
-    studentAssigned: {
-        type: String,
-    },
-    dateOut: {
-        type: Date,
-    },
-    dateIn: {
-        type: Date,
-    }
-})
 
 const instrumentSchema = mongoose.Schema({
     type: {
@@ -30,10 +19,16 @@ const instrumentSchema = mongoose.Schema({
     },
     schoolNumber: {
         type: String,
-        default: "",
     }, 
-    assignedTo: {
-        type: [assignmentSchema],
+    studentAssigned: {
+        type: String,
+        default: ""
+    },
+    dateOut: {
+        type: Date,
+    },
+    dateIn: {
+        type: Date,
     },
     damageNotes: {
         type: []

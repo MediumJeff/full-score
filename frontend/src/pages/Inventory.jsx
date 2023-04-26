@@ -63,7 +63,7 @@ const Inventory = () => {
   const editItem = () => {
     dispatch(updateInstrument({ instId: updatedItem._id, instData: updatedItem }))
     setEditModal(false)
-    //window.location.reload(true)
+    window.location.reload(true)
   }
 
   const newInstrument = () => {
@@ -101,7 +101,7 @@ const Inventory = () => {
                 <td>{inst.make}</td>
                 <td>{inst.model}</td>
                 <td>{inst.serialNumber}</td>
-                <td>{inst.assignedTo.map(item => item.studentAssigned)}</td>
+                <td>{inst.studentAssigned}</td>
                 <td>{inst.damageNotes}</td>
                 <td><Button variant="success" active className='btn' onClick={() => { itemDisplay(inst) }}>Inspect</Button></td>
               </tr>
@@ -124,8 +124,8 @@ const Inventory = () => {
             <p>Model: {itemDetail.model}</p>
             <p>Serial No.: {itemDetail.serialNumber}</p>
             <p>Notes: {itemDetail.damageNotes}</p>
-            <p>Assigned to: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.studentAssigned) : null}</p>
-            <p>Date Out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toLocaleDateString()) : null}</p>
+            <p>Assigned to: {itemDetail.studentAssigned}</p>
+            <p>Date Out: {new Date(itemDetail.dateOut).toLocaleDateString()}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleClose}>Close</Button>
@@ -145,7 +145,7 @@ const Inventory = () => {
           </Modal.Header>
           <Modal.Body>
             <Form>
-              <Form.Group className="mb-3" controlId="title">
+              <Form.Group className="mb-3" controlId="type">
                 <Form.Label>Instrument Type: </Form.Label>
                 <Form.Control type="text" name="type" value={updatedItem.type} onChange={onChange} />
               </Form.Group>
@@ -165,17 +165,17 @@ const Inventory = () => {
                 <Form.Label>School Number: </Form.Label>
                 <Form.Control type="text" name="schoolNumber" value={updatedItem.schoolNumber} onChange={onChange} />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="assignedTo">
+              <Form.Group className="mb-3" controlId="studentAssigned">
                 <Form.Label>Assigned to:  </Form.Label>
-                <Form.Control type="text" name="assignedTo" value={(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => item.studentAssigned) : null} onChange={onChange} />
+                <Form.Control type="text" name="studentAssigned" value={updatedItem.studentAssigned} onChange={onChange} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="dateOut">
-                <Form.Label>Date Out: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toLocaleDateString()) : null}</Form.Label>
-                <Form.Control type="datetime-local" name="dateOut" value={(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateOut).toISO) : null} onChange={onChange} />
+                <Form.Label>Date Out: {new Date(itemDetail.dateOut).toLocaleDateString()}</Form.Label>
+                <Form.Control type="datetime-local" name="dateOut" value={new Date(updatedItem.dateOut).toISO} onChange={onChange} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="dateIn">
-                <Form.Label>Date In: {(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateIn).toLocaleDateString()) : null}</Form.Label>
-                <Form.Control type="datetime-local" name="dateIn" value={(itemDetail.assignedTo) ? itemDetail.assignedTo.map(item => new Date(item.dateIn).toLocaleDateString()) : null} onChange={onChange} />
+                <Form.Label>Date In: {new Date(itemDetail.dateIn).toLocaleDateString()}</Form.Label>
+                <Form.Control type="datetime-local" name="dateIn" value={new Date(updatedItem.dateIn).toISO} onChange={onChange} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="damageNotes">
                 <Form.Label>Notes: </Form.Label>

@@ -33,7 +33,7 @@ export const getInstrument = createAsyncThunk('instruments', async (_, thunkAPI)
     }
 })
 
-export const getEventById = createAsyncThunk('instruments/', async (id, thunkAPI) => {
+export const getInstById = createAsyncThunk('instruments/', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await inventoryService.getInstById(id, token)
@@ -43,7 +43,7 @@ export const getEventById = createAsyncThunk('instruments/', async (id, thunkAPI
     }
 })
 
-// Update event function
+// Update instrument function
 export const updateInstrument = createAsyncThunk('instruments/update',
     async ({ instId, instData }, thunkAPI) => {
         try {
@@ -55,7 +55,7 @@ export const updateInstrument = createAsyncThunk('instruments/update',
         }
     })
 
-// Delete event function
+// Delete instrument function
 export const deleteInstrument = createAsyncThunk('instruments/delete',
     async (id, thunkAPI) => {
         try {

@@ -15,11 +15,11 @@ function AddInstrument() {
     model: '',
     serialNumber: '',
     schoolNumber: '',
-    assignedTo: [],
+    studentAssigned: '',
     damageNotes: ''
   })
 
-  const { type, make, model, serialNumber, schoolNumber, assignedTo, damageNotes } = instrumentData
+  const { type, make, model, serialNumber, schoolNumber, studentAssigned, damageNotes } = instrumentData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -88,7 +88,7 @@ function AddInstrument() {
             <input type="text" className="form-control" id="schoolNumber" name="schoolNumber" value={schoolNumber} placeholder='Enter the school inventory number (optional)' onChange={onChange} />
           </div>
           <div className="form-group">
-            <input type="text" className="form-control" id="assignedTo" name="assignedTo" value={assignedTo} placeholder='Student assigned' onChange={onChange} />
+            <input type="text" className="form-control" id="studentAssigned" name="studentAssigned" value={studentAssigned} placeholder='Student assigned' onChange={onChange} />
           </div>
           <div className="form-group">
             <input type="text" className="form-control" id="damageNotes" name="damageNotes" value={damageNotes} placeholder='Notes on condition, accessories' onChange={onChange} />
