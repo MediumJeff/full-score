@@ -15,6 +15,11 @@ const getStudent = asyncHandler(async (req, res) => {
     }
 })
 
+const getStudentById = asyncHandler(async (req, res) => {
+    const studentById = await Student.findById(req.params.id)
+    res.status(200).json(studentById)
+})
+
 // BEWARE of nested data within student files
 // @desc Create student file
 // @route POST /api/students
@@ -80,6 +85,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
 
 module.exports = {
     getStudent,
+    getStudentById,
     createStudent,
     updateStudent,
     deleteStudent,
