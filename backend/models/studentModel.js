@@ -76,7 +76,7 @@ const studentSchema = mongoose.Schema({
         required: [true, 'Please enter your primary instrument or vocal range.']
     },
     ensembles: {
-        type: String,
+        type: Array,
         default: [],
         required: [true, 'Please enter at least one ensemble membership.']
     },
