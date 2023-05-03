@@ -35,6 +35,23 @@ const Inventory = () => {
   const [show, setShow] = useState(false)
   const [updatedItem, setUpdatedItem] = useState([])
   const [editModal, setEditModal] = useState(false)
+  const [sortedField, setSortedField] = useState(null)
+
+  const tableSorter = (props) => {
+    let { instruments } = props
+    let sortedInstruments = [...instruments]
+    if (sortedField !== null) {
+      sortedInstruments.sort((a,b) => {
+        if(a[sortedField] < b[sortedField]) {
+          return -1
+        }
+        if(a[sortedField] > b[sortedField]) {
+          return 1
+        }
+        return 0
+      })
+    }
+  }
 
   const itemDisplay = (e) => {
     setItemDetail(e)
@@ -85,11 +102,19 @@ const Inventory = () => {
         <Table>
           <thead>
             <tr>
-              <th>Type</th>
-              <th>Make</th>
-              <th>Model</th>
+              <th>
+                <button type="button" onClick={() => setSortedField('type')}>Type</button>
+              </th>
+              <th>
+                <button type="button" onClick={() => setSortedField('make')}>Make</button>
+              </th>
+              <th>
+                <button type="button" onClick={() => setSortedField('model')}>Model</button>
+              </th>
               <th>Serial Number</th>
-              <th>Assigned to:</th>
+              <th>
+                <button type="button" onClick={() => setSortedField('assignedTo')}>Assigned to:</button>
+              </th>
               <th>Notes</th>
               <th></th>
             </tr>
