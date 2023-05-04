@@ -18,10 +18,10 @@ function AddStudent() {
     instruments: [],
     email: '',
     address: {
-        street: '',
-        city: '',
-        state: '',
-        zipCode: ''
+      street: '',
+      city: '',
+      state: '',
+      zipCode: ''
     },
     phone: ''
   })
