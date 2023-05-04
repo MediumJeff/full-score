@@ -1,5 +1,5 @@
 import { FaClipboardList } from 'react-icons/fa';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Table, Button, Form } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { getInstrument, deleteInstrument, updateInstrument, reset } from '../features/inventory/inventorySlice';
 
 
-const Inventory = (props) => {
+const Inventory = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,21 +35,31 @@ const Inventory = (props) => {
   const [show, setShow] = useState(false)
   const [updatedItem, setUpdatedItem] = useState([])
   const [editModal, setEditModal] = useState(false)
-  const [sortConfig, setSortConfig] = useState({key: null, direction: null})
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null })
 
+  // Functions for sorting table data
   let sortedInstruments = [...instruments]
   if (sortedInstruments !== null) {
-    sortedInstruments.sort((a,b) => {
-      if(a[sortConfig.key] < b[sortConfig.key]) {
+    sortedInstruments.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
         return sortConfig.direction === 'ascending' ? -1 : 1
       }
-      if(a[sortConfig.key] > b[sortConfig.key]) {
+      if (a[sortConfig.key] > b[sortConfig.key]) {
         return sortConfig.direction === 'ascending' ? 1 : -1
       }
       return 0
     })
   }
 
+  const requestSort = key => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  }
+
+  // Functions for displaying data, adding, editing, and deleting items
   const itemDisplay = (e) => {
     setItemDetail(e)
     setShow(true)
@@ -85,7 +95,6 @@ const Inventory = (props) => {
   }
 
 
-
   return (
     <>
       {/* Display table with instruments, limit number visible at first? */}
@@ -100,17 +109,17 @@ const Inventory = (props) => {
           <thead>
             <tr>
               <th>
-                <button className='btn' onClick={() => setSortConfig({key:'type', direction: 'ascending'})}>Type</button>
+                <button className='btn' onClick={() => requestSort('type')}>Type</button>
               </th>
               <th>
-              <button className='btn' onClick={() => setSortConfig({key:'make', direction: 'ascending'})}>Make</button>
+                <button className='btn' onClick={() => requestSort('make')}>Make</button>
               </th>
               <th>
-              <button className='btn' onClick={() => setSortConfig({key:'model', direction: 'ascending'})}>Model</button>
+                <button className='btn' onClick={() => requestSort('model')}>Model</button>
               </th>
               <th>Serial Number</th>
               <th>
-              <button className='btn' onClick={() => setSortConfig({key:'studentAssigned', direction: 'ascending'})}>Assigned to:</button>
+                <button className='btn' onClick={() => requestSort('studentAssigned')}>Assigned to:</button>
               </th>
               <th>Notes</th>
               <th></th>
