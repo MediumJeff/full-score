@@ -1,5 +1,5 @@
 import { FaClipboardList } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Table, Button, Form } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { getInstrument, deleteInstrument, updateInstrument, reset } from '../features/inventory/inventorySlice';
 
 
-const Inventory = () => {
+const Inventory = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,22 +35,19 @@ const Inventory = () => {
   const [show, setShow] = useState(false)
   const [updatedItem, setUpdatedItem] = useState([])
   const [editModal, setEditModal] = useState(false)
-  const [sortedField, setSortedField] = useState(null)
+  const [sortConfig, setSortConfig] = useState({key: null, direction: null})
 
-  const tableSorter = (props) => {
-    let { instruments } = props
-    let sortedInstruments = [...instruments]
-    if (sortedField !== null) {
-      sortedInstruments.sort((a,b) => {
-        if(a[sortedField] < b[sortedField]) {
-          return -1
-        }
-        if(a[sortedField] > b[sortedField]) {
-          return 1
-        }
-        return 0
-      })
-    }
+  let sortedInstruments = [...instruments]
+  if (sortedInstruments !== null) {
+    sortedInstruments.sort((a,b) => {
+      if(a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? -1 : 1
+      }
+      if(a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? 1 : -1
+      }
+      return 0
+    })
   }
 
   const itemDisplay = (e) => {
@@ -103,24 +100,24 @@ const Inventory = () => {
           <thead>
             <tr>
               <th>
-                <button type="button" onClick={() => setSortedField('type')}>Type</button>
+                <button className='btn' onClick={() => setSortConfig({key:'type', direction: 'ascending'})}>Type</button>
               </th>
               <th>
-                <button type="button" onClick={() => setSortedField('make')}>Make</button>
+              <button className='btn' onClick={() => setSortConfig({key:'make', direction: 'ascending'})}>Make</button>
               </th>
               <th>
-                <button type="button" onClick={() => setSortedField('model')}>Model</button>
+              <button className='btn' onClick={() => setSortConfig({key:'model', direction: 'ascending'})}>Model</button>
               </th>
               <th>Serial Number</th>
               <th>
-                <button type="button" onClick={() => setSortedField('assignedTo')}>Assigned to:</button>
+              <button className='btn' onClick={() => setSortConfig({key:'studentAssigned', direction: 'ascending'})}>Assigned to:</button>
               </th>
               <th>Notes</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {instruments.map((inst, id) => (
+            {sortedInstruments.map((inst, id) => (
               <tr key={id}>
                 <td>{inst.type}</td>
                 <td>{inst.make}</td>
