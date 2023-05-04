@@ -31,6 +31,9 @@ const Students = () => {
     }
   }, [user, isError, isSuccess, message, dispatch, navigate])
 
+  const newStudent = () => {
+    navigate('/addStudent')
+  }
 
   return (
     <>
@@ -63,6 +66,9 @@ const Students = () => {
             ))}
           </tbody>
         </Table>
+      </div>
+      <div>
+        <Button variant="primary" active className='btn' onClick={newStudent}>Add Student</Button>
       </div>
     </>
   )

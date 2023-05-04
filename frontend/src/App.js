@@ -11,6 +11,7 @@ import AddEvent from './components/AddEvent';
 import Inventory from './pages/Inventory';
 import AddInstrument from './components/AddInstrument';
 import Students from './pages/Students';
+import AddStudent from './components/AddStudent';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path='/inventory' element={<Inventory />} />
             <Route path='/addInstrument' element={<AddInstrument />} />
             <Route path='/students' element={<Students />} />
+            <Route path='/addStudent' element={<AddStudent />} />
           </Routes>
         </div>
       </Router>
