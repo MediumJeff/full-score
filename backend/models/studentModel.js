@@ -71,13 +71,13 @@ const studentSchema = mongoose.Schema({
         required: [true, 'Please enter your current grade level.']
     },
     instrument: {
-        type: Array,
-        default: [],
+        type: String,
+        default: '',
         required: [true, 'Please enter your primary instrument or vocal range.']
     },
     ensembles: {
-        type: Array,
-        default: [],
+        type: String,
+        default: '',
         required: [true, 'Please enter at least one ensemble membership.']
     },
     email: {

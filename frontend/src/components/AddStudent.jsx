@@ -61,7 +61,7 @@ function AddStudent() {
       toast.error('Must have admin account to add student')
     } else {
       dispatch(createStudent(studentData))
-      navigate('/')
+      navigate('/students')
     }
   }
 
