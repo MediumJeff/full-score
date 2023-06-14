@@ -143,6 +143,7 @@ const Inventory = () => {
       <div>
         <Button variant="primary" active className='btn' onClick={newInstrument}>Add New</Button>
       </div>
+
       {/* Modal to display instrument details */}
       <div>
         <Modal show={show}>
@@ -168,6 +169,7 @@ const Inventory = () => {
           </Modal.Footer>
         </Modal>
       </div>
+
       {/* Additional modal to edit instrument details. Admin only. */}
       <div>
         <Modal show={editModal}>
